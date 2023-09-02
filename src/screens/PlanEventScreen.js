@@ -9,6 +9,14 @@ import {
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
+const Colors = {
+  primary: '#FF3366', // Romantic tone color
+  secondary: '#007AFF', // Blue
+  background: '#fff', // White background
+  text: '#333', // Dark text color
+  inputBorder: '#ccc', // Light gray border color
+};
+
 const PlanEventScreen = ({ route }) => {
   const { idea } = route.params;
 
@@ -66,6 +74,7 @@ const PlanEventScreen = ({ route }) => {
         multiline={true}
         numberOfLines={4}
         onChangeText={(text) => setNotes(text)}
+        placeholderTextColor={Colors.text}
       />
       <TouchableOpacity
         style={styles.generateLinkButton}
@@ -81,52 +90,47 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
   },
   header: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 16,
-    color: '#FF3366',
+    color: Colors.primary,
     textAlign: 'center',
   },
   datePickerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 24,
   },
   label: {
-    fontSize: 18,
+    fontSize: 20,
     marginRight: 8,
+    color: Colors.primary,
   },
   selectedDate: {
-    fontSize: 18,
-    color: '#333',
+    fontSize: 20,
+    color: Colors.text,
   },
   notesInput: {
     width: '100%',
-    height: 100,
-    borderColor: '#ccc',
+    height: 120,
+    borderColor: Colors.inputBorder,
     borderWidth: 1,
-    marginBottom: 16,
+    marginBottom: 24,
     paddingLeft: 8,
-  },
-  planEventButton: {
-    backgroundColor: '#FF3366',
-    padding: 12,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 12,
+    color: Colors.text,
   },
   generateLinkButton: {
-    backgroundColor: '#007AFF',
-    padding: 12,
+    backgroundColor: Colors.secondary,
+    padding: 16,
     borderRadius: 8,
     alignItems: 'center',
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 20,
   },
 });
 
