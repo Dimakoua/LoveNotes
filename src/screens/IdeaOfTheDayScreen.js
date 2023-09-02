@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { ideas } from '../ideas/list';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const IdeaOfTheDayScreen = ({ navigation }) => {
   const [idea, setIdea] = useState(null);
@@ -11,9 +12,17 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
     generateIdea();
   }, []);
 
-  const generateIdea = () => {
-    const randomIndex = Math.floor(Math.random() * ideas.length);
-    const randomElement = ideas[randomIndex];
+  const generateIdea = async () => {
+    let ideaList = ideas;
+    const storedIdeas = await AsyncStorage.getItem('ideas');
+    if(storedIdeas !== null){
+      ideaList = JSON.parse(storedIdeas);
+    }
+
+    const randomIndex = Math.floor(Math.random() * ideaList.length);
+    const randomElement = ideaList[randomIndex];
+
+    console.log(randomElement)
     setIdea(randomElement.text);
 
     const array = [...ideaHistoryStack]; // Create a new array to avoid mutating state directly

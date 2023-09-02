@@ -8,8 +8,10 @@ import { Icon } from '@rneui/themed';
 import ConfigScreen from '../screens/ConfigScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import IdeaOfTheDayScreen from '../screens/IdeaOfTheDayScreen';
+import IdeasScreen from '../screens/IdeasScreen';
 import PlanEventScreen from '../screens/PlanEventScreen'; 
 import { createStackNavigator } from '@react-navigation/stack';
+
 //Screen names
 const homeName = "Home";
 const configName = "Details";
@@ -59,7 +61,7 @@ function MainContainer() {
                 })}>
 
                 <Tab.Screen name={homeName} component={HomeStack} options={{ headerShown: false }} />
-                <Tab.Screen name={configName} component={ConfigScreen} options={{ headerShown: false }} />
+                <Tab.Screen name={configName} component={IdeasScreen} options={{ headerShown: false }} />
                 <Tab.Screen name={settingsName} component={SettingsScreen} options={{ headerShown: false }} />
 
             </Tab.Navigator>
