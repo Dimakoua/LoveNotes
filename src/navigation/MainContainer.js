@@ -14,6 +14,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 //Screen names
 const homeName = "Home";
+const ideasName = "Ideas";
 const configName = "Details";
 const settingsName = "Settings";
 const planEvent = "planEvent";
@@ -24,8 +25,8 @@ const Stack = createStackNavigator();
 // Stack Navigator for the Home tab
 function HomeStack() {
     return (
-        <Stack.Navigator initialRouteName={homeName}>
-            <Stack.Screen name={homeName} component={IdeaOfTheDayScreen} options={{ headerShown: false }} />
+        <Stack.Navigator initialRouteName={ideasName}>
+            <Stack.Screen name={ideasName} component={IdeaOfTheDayScreen} options={{ headerShown: false }} />
             <Stack.Screen name={planEvent} component={PlanEventScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
@@ -56,13 +57,12 @@ function MainContainer() {
                         }
 
                         // You can return any component that you like here!
-                        return <Icon name={iconName} type='ionicon' size={size} color={color} />
+                        return <Ionicons name={iconName} size={size} color={color} />;
                     },
                 })}>
 
-                <Tab.Screen name={homeName} component={HomeStack} options={{ headerShown: false }} />
-                <Tab.Screen name={configName} component={IdeasScreen} options={{ headerShown: false }} />
-                <Tab.Screen name={settingsName} component={SettingsScreen} options={{ headerShown: false }} />
+                <Tab.Screen name="Home"     component={HomeStack} options={{ headerShown: false }} />
+                <Tab.Screen name="Ideas"    component={IdeasScreen} options={{ headerShown: false }} />
 
             </Tab.Navigator>
         </NavigationContainer>

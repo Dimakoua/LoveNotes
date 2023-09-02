@@ -10,11 +10,11 @@ import {
 import DatePicker from 'react-native-date-picker';
 
 const Colors = {
-  primary: '#FF3366', // Romantic tone color
-  secondary: '#007AFF', // Blue
-  background: '#fff', // White background
-  text: '#333', // Dark text color
-  inputBorder: '#ccc', // Light gray border color
+  primary: '#FF3366',
+  secondary: '#007AFF',
+  background: '#fff',
+  text: '#333',
+  inputBorder: '#ccc',
 };
 
 const PlanEventScreen = ({ route }) => {
@@ -27,7 +27,7 @@ const PlanEventScreen = ({ route }) => {
   const generateGoogleCalendarLink = () => {
     const eventTitle = `Plan: ${idea}`;
     const startDate = selectedDate.toISOString();
-    const endDate = new Date(selectedDate.getTime() + 2 * 60 * 60 * 1000).toISOString(); // End time is 2 hours later
+    const endDate = new Date(selectedDate.getTime() + 2 * 60 * 60 * 1000).toISOString();
     const eventDescription = notes;
     const eventLocation = 'Your Location';
 
@@ -39,7 +39,6 @@ const PlanEventScreen = ({ route }) => {
       eventLocation
     )}`;
 
-    // Open the link in the default browser
     Linking.openURL(googleCalendarLink);
   };
 
@@ -70,7 +69,7 @@ const PlanEventScreen = ({ route }) => {
       )}
       <TextInput
         style={styles.notesInput}
-        placeholder="Notes"
+        placeholder="Notes (optional)"
         multiline={true}
         numberOfLines={4}
         onChangeText={(text) => setNotes(text)}
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 16,
+    marginBottom: 24, // Increased spacing for better readability
     color: Colors.primary,
     textAlign: 'center',
   },
@@ -105,12 +104,12 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   label: {
-    fontSize: 20,
+    fontSize: 18, // Slightly reduced font size
     marginRight: 8,
     color: Colors.primary,
   },
   selectedDate: {
-    fontSize: 20,
+    fontSize: 18, // Slightly reduced font size
     color: Colors.text,
   },
   notesInput: {
@@ -121,6 +120,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     paddingLeft: 8,
     color: Colors.text,
+    fontSize: 16, // Adjusted font size for better readability
   },
   generateLinkButton: {
     backgroundColor: Colors.secondary,
@@ -130,7 +130,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 18, // Slightly reduced font size
+    fontWeight: 'bold', // Added bold font weight
   },
 });
 

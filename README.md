@@ -80,3 +80,17 @@ To learn more about React Native, take a look at the following resources:
 
 
  cd "C:\Users\Dmytro\Documents\project\LoveNotes" && npx react-native run-android
+
+
+
+ java -jar bundletool-all-1.15.4.jar version
+
+
+
+bundletool build-apks --bundle=app-release.aab --output=app-release.apks --mode=universal
+bundletool get-apks --apks=app-release.apks --output-dir=apks
+
+
+ java -jar bundletool-all-1.15.4.jar build-apks --bundle=app-release.aab --output=app-release.apks --mode=universal
+ java -jar bundletool-all-1.15.4.jar extract-apks --apks=app-release.apks --output-dir=apks
+ java -jar bundletool-all-1.15.4.jar extract-apks --apks=app-release.apks --output-dir=apks  --device-spec=device-spec.json
