@@ -22,7 +22,6 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
     const randomIndex = Math.floor(Math.random() * ideaList.length);
     const randomElement = ideaList[randomIndex];
 
-    console.log(randomElement)
     setIdea(randomElement.text);
 
     const array = [...ideaHistoryStack]; // Create a new array to avoid mutating state directly
