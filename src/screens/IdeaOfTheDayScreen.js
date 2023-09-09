@@ -60,8 +60,9 @@ const styles = StyleSheet.create({
     maxHeight: 200,
   },
   ideaText: {
-    fontSize: 18,
+    fontSize: 15,
     color: '#333',
+    textAlign: 'center'
   },
   buttonContainer: {
     paddingLeft: '3%',
