@@ -5,11 +5,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Icon } from '@rneui/themed';
 
 // Screens
-import ConfigScreen from '../screens/ConfigScreen';
-import SettingsScreen from '../screens/SettingsScreen';
 import IdeaOfTheDayScreen from '../screens/IdeaOfTheDayScreen';
-import IdeasScreen from '../screens/IdeasScreen';
-import PlanEventScreen from '../screens/PlanEventScreen'; 
+import IdeasScreen from '../screens/IdeaListScreen';
+import PlanEventScreen from '../screens/PlanEventScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 
 //Screen names
@@ -32,6 +30,7 @@ function HomeStack() {
     );
 }
 
+
 function MainContainer() {
     return (
         <NavigationContainer>
@@ -41,7 +40,11 @@ function MainContainer() {
                     activeTintColor: 'tomato',
                     inactiveTintColor: 'grey',
                     labelStyle: { paddingBottom: 10, fontSize: 10 },
-                    style: { padding: 10, height: 70 },
+                    tabBarStyle: {
+                        backgroundColor: 'rgb(252, 247, 241)',
+                        elevation: 0, // Remove shadow on Android
+                        shadowOpacity: 0, // Remove shadow on iOS
+                    },
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
                         let rn = route.name;
@@ -61,8 +64,8 @@ function MainContainer() {
                     },
                 })}>
 
-                <Tab.Screen name="Home"     component={HomeStack} options={{ headerShown: false }} />
-                <Tab.Screen name="Ideas"    component={IdeasScreen} options={{ headerShown: false }} />
+                <Tab.Screen name="Home" component={HomeStack} options={{ headerShown: false }} />
+                <Tab.Screen name="Ideas" component={IdeasScreen} options={{ headerShown: false }} />
 
             </Tab.Navigator>
         </NavigationContainer>
