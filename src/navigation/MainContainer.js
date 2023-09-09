@@ -9,6 +9,7 @@ import IdeaOfTheDayScreen from '../screens/IdeaOfTheDayScreen';
 import IdeasScreen from '../screens/IdeaListScreen';
 import PlanEventScreen from '../screens/PlanEventScreen';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Image } from 'react-native';
 
 //Screen names
 const homeName = "Home";
@@ -39,7 +40,7 @@ function MainContainer() {
                 screenOptions={({ route }) => ({
                     activeTintColor: 'tomato',
                     inactiveTintColor: 'grey',
-                    labelStyle: { paddingBottom: 10, fontSize: 10 },
+                    tabBarLabel: () => null,
                     tabBarStyle: {
                         backgroundColor: 'rgb(252, 247, 241)',
                         elevation: 0, // Remove shadow on Android
@@ -50,17 +51,16 @@ function MainContainer() {
                         let rn = route.name;
 
                         if (rn === homeName) {
-                            iconName = focused ? 'home' : 'home-outline';
+                            iconName = focused ? require('../../assets/images/home.png') : require('../../assets/images/home_active.png');
 
-                        } else if (rn === configName) {
-                            iconName = focused ? 'list' : 'list-outline';
+                        } else if (rn === ideasName) {
+                            iconName = focused ? require('../../assets/images/list.png') : require('../../assets/images/list_active.png');
 
-                        } else if (rn === settingsName) {
-                            iconName = focused ? 'settings' : 'settings-outline';
-                        }
+                        } 
 
                         // You can return any component that you like here!
-                        return <Ionicons name={iconName} size={size} color={color} />;
+                        // return <Ionicons name={iconName} size='{size} color={color} />;
+                        return <Image source={iconName}/> // Provide the correct path to your image/>
                     },
                 })}>
 
