@@ -21,10 +21,10 @@ export function useIdea() {
         const randomIndex = Math.floor(Math.random() * ideaList.length);
         const randomElement = ideaList[randomIndex];
 
-        setIdea(randomElement.text);
+        setIdea(randomElement);
 
         const array = [...ideaHistoryStack];
-        array.push(randomElement.text);
+        array.push(randomElement);
         setIdeaHistoryStack(array);
     };
 

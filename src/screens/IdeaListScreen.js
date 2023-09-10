@@ -77,6 +77,8 @@ const styles = StyleSheet.create({
 });
 
 const IdeasScreen = () => {
+  const { t } = useTranslation();
+  
   const [ideas, setIdeas] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedIdea, setSelectedIdea] = useState(null);
