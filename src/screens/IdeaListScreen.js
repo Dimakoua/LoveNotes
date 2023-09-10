@@ -13,72 +13,9 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ideas as list } from '../ideas/list';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff', // Set a white background
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    color: '#FF3366', // Romantic tone color
-  },
-  ideaContainer: {
-    backgroundColor: '#FFCCCC', // Light pink background
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 16,
-  },
-  ideaText: {
-    fontSize: 18,
-    color: '#333', // Dark text color
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  addButton: {
-    backgroundColor: '#FF3366', // Romantic tone button background color
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: '#fff', // White button text color
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
-  },
-  modalContent: {
-    width: '80%',
-    backgroundColor: '#fff', // White modal background
-    padding: 20,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  input: {
-    width: '100%',
-    padding: 16,
-    borderColor: '#ddd', // Light gray border color
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 16,
-  },
-});
-
 const IdeasScreen = () => {
   const { t } = useTranslation();
-  
+
   const [ideas, setIdeas] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedIdea, setSelectedIdea] = useState(null);
@@ -219,5 +156,68 @@ const IdeasScreen = () => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff', // Set a white background
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    color: '#FF3366', // Romantic tone color
+  },
+  ideaContainer: {
+    backgroundColor: '#FFCCCC', // Light pink background
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 16,
+  },
+  ideaText: {
+    fontSize: 18,
+    color: '#333', // Dark text color
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  addButton: {
+    backgroundColor: '#FF3366', // Romantic tone button background color
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#fff', // White button text color
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+  },
+  modalContent: {
+    width: '80%',
+    backgroundColor: '#fff', // White modal background
+    padding: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  input: {
+    width: '100%',
+    padding: 16,
+    borderColor: '#ddd', // Light gray border color
+    borderWidth: 1,
+    borderRadius: 5,
+    marginBottom: 16,
+  },
+});
 
 export default IdeasScreen;

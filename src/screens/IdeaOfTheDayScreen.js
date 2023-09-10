@@ -19,6 +19,14 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
         style={styles.image}
         resizeMode="cover"
       >
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("")} // Замініть на потрібний екран налаштувань
+          style={styles.settingsButton}
+        >
+          <Image source={require('../../assets/images/icons-settings-64.png')} style={styles.settingsButtonImage} />
+        </TouchableOpacity>
+
         {idea ? (
           <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -41,7 +49,7 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
         ) : null}
 
       </ImageBackground>
-    </View>
+    </View >
   );
 };
 
@@ -56,6 +64,15 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+  },
+  settingsButton: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+  },
+  settingsButtonImage: {
+    width: 40,
+    height: 40
   },
   ideaContainer: {
     // backgroundColor: 'rgba(255, 204, 204, 0.7)',
@@ -82,7 +99,6 @@ const styles = StyleSheet.create({
     height: 120,
     maxHeight: 200,
   },
-
   buttonText: {
     color: '#fff',
     fontSize: 16,
