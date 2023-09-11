@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, Text, StyleSheet, ImageBackground, Linking } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import BackBottom from '../components/BackBottom';
 
 function IdeaDetailsScreen({ route }) {
     const { t } = useTranslation();
@@ -39,15 +40,19 @@ function IdeaDetailsScreen({ route }) {
                 style={styles.image}
                 resizeMode="cover"
             >
-                    <View style={styles.ideaTextWrap}>
-                        <Text style={styles.ideaText}>{t(idea.key)}</Text>
-                        <TouchableOpacity
-                            style={styles.planEventButton}
-                            onPress={generateGoogleCalendarLink}
-                        >
-                            <Text style={styles.buttonText}>{t('schedule_event')}</Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style={styles.backBotton}>
+                    <BackBottom />
+                </View>
+
+                <View style={styles.ideaTextWrap}>
+                    <Text style={styles.ideaText}>{t(idea.key)}</Text>
+                    <TouchableOpacity
+                        style={styles.planEventButton}
+                        onPress={generateGoogleCalendarLink}
+                    >
+                        <Text style={styles.buttonText}>{t('schedule_event')}</Text>
+                    </TouchableOpacity>
+                </View>
 
             </ImageBackground>
 
@@ -61,6 +66,11 @@ const styles = StyleSheet.create({
     },
     image: {
         flex: 1,
+    },
+    backBotton: {
+        position: 'absolute',
+        top: 20,
+        left: 20,
     },
     ideaTextWrap: {
         position: 'absolute',

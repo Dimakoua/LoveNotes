@@ -21,7 +21,7 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
       >
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("")} // Замініть на потрібний екран налаштувань
+          onPress={() => navigation.navigate("Settings")} // Замініть на потрібний екран налаштувань
           style={styles.settingsButton}
         >
           <Image source={require('../../assets/images/icons-settings-64.png')} style={styles.settingsButtonImage} />
@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
     right: 20,
   },
   settingsButtonImage: {
-    width: 40,
-    height: 40
+    width: 35,
+    height: 35
   },
   ideaContainer: {
     // backgroundColor: 'rgba(255, 204, 204, 0.7)',
