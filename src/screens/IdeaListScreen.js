@@ -115,7 +115,7 @@ const IdeaListScreen = () => {
             setModalVisible(true);
           }}
         >
-          <Text style={styles.buttonText}>+ Add Idea</Text>
+          <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
       </View>
 
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     padding: 16,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff', // Set a white background
+    backgroundColor: 'rgba(253, 246, 238, 0.7)', // Same background color as SettingsScreen
   },
   backButton: {
     position: 'absolute',
@@ -179,17 +179,17 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
-    color: '#FF3366', // Romantic tone color
+    color: 'rgb(222, 178, 150)', // Same header color as SettingsScreen
   },
   ideaContainer: {
-    backgroundColor: '#FFCCCC', // Light pink background
+    backgroundColor: 'rgba(255, 204, 204, 0.7)', // Same background color as SettingsScreen
     padding: 16,
     borderRadius: 8,
     marginBottom: 16,
   },
   ideaText: {
     fontSize: 18,
-    color: '#333', // Dark text color
+    color: 'rgb(51, 51, 51)', // Same text color as SettingsScreen
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -197,15 +197,19 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   addButton: {
-    backgroundColor: '#FF3366', // Romantic tone button background color
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
+    backgroundColor: 'rgb(222, 178, 150)', // Same button background color as SettingsScreen
+    width: 54, // Set a fixed width and height to make it circular
+    height: 54,
+    borderRadius: 32, // Half of the width/height to create a circle
+    justifyContent: 'center', // Center the text vertically
+    alignItems: 'center', // Center the text horizontally
+    position: 'absolute', // Position it absolutely
+    bottom: 16, // Adjust the bottom position for spacing
+    right: 16, // Adjust the left position for spacing
   },
   buttonText: {
-    color: '#fff', // White button text color
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: '#fff', 
+    fontSize: 24,
   },
   modalContainer: {
     flex: 1,
@@ -229,5 +233,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 });
+
 
 export default IdeaListScreen;
