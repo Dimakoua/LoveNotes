@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Modal,
   TextInput,
-  Button,
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
@@ -50,7 +49,7 @@ const IdeaListScreen = () => {
 
   const addIdea = () => {
     if (newIdeaText) {
-      const updatedIdeas = [...ideas, { id: Date.now(), text: newIdeaText }];
+      const updatedIdeas = [...ideas, { id: Date.now(), text: newIdeaText, key: newIdeaText }];
       setIdeas(updatedIdeas);
       saveIdeas(updatedIdeas);
       setNewIdeaText('');
@@ -135,29 +134,37 @@ const IdeaListScreen = () => {
               multiline={true}
             />
             <View style={styles.buttonContainer}>
-              <Button
-                title={selectedIdea ? "Save" : "Add"}
+              <TouchableOpacity
+                style={[styles.modalButton, styles.saveButton]}
                 onPress={selectedIdea ? editIdea : addIdea}
-              />
+              >
+                <Text style={styles.modalButtonText}>
+                  {selectedIdea ? 'Save' : 'Add'}
+                </Text>
+              </TouchableOpacity>
               {selectedIdea && (
-                <Button
-                  title="Delete"
+                <TouchableOpacity
+                  style={[styles.modalButton, styles.deleteButton]}
                   onPress={deleteIdea}
-                  color="#FF5A5F" // Use the secondary color
-                />
+                >
+                  <Text style={styles.modalButtonText}>{t('Delete')}</Text>
+                </TouchableOpacity>
               )}
+              <TouchableOpacity
+                style={[styles.modalButton, styles.closeButton]}
+                onPress={() => {
+                  setModalVisible(false);
+                  setSelectedIdea(null);
+                  setNewIdeaText('');
+                }}
+              >
+                <Text style={styles.modalButtonText}>{t('Close')}</Text>
+              </TouchableOpacity>
             </View>
-            <Button
-              title="Close"
-              onPress={() => {
-                setModalVisible(false);
-                setSelectedIdea(null);
-                setNewIdeaText('');
-              }}
-            />
           </View>
         </View>
       </Modal>
+
     </SafeAreaView>
   );
 };
@@ -208,9 +215,12 @@ const styles = StyleSheet.create({
     right: 16, // Adjust the left position for spacing
   },
   buttonText: {
-    color: '#fff', 
+    color: '#fff',
     fontSize: 24,
   },
+
+
+
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -218,11 +228,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
   },
   modalContent: {
-    width: '80%',
-    backgroundColor: '#fff', // White modal background
-    padding: 20,
+    width: '90%', // Adjust the width as needed
+    backgroundColor: 'white', // White modal background
     borderRadius: 8,
-    alignItems: 'center',
+    padding: 20,
   },
   input: {
     width: '100%',
@@ -231,6 +240,32 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     marginBottom: 16,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  modalButton: {
+    flex: 1,
+    padding: 12,
+    borderRadius: 5,
+    marginHorizontal: 8,
+    alignItems: 'center',
+  },
+  modalButtonText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  saveButton: {
+    backgroundColor: 'rgb(222, 178, 150)', // Save button background color
+  },
+  deleteButton: {
+    backgroundColor: '#FF5A5F', // Delete button background color
+  },
+  closeButton: {
+    backgroundColor: 'gray', // Close button background color
   },
 });
 
