@@ -14,7 +14,7 @@ function IdeaDetailsScreen({ route }) {
     };
 
     const generateGoogleCalendarLink = () => {
-        const eventTitle = `Plan: ${t(idea.text)}`;
+        const eventTitle = `Plan: ${t(idea.key)}`;
         const selectedDate = new Date();
         const startDate = selectedDate.toISOString();
         const endDate = new Date(selectedDate.getTime() + 2 * 60 * 60 * 1000).toISOString();
