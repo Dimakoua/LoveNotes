@@ -12,8 +12,10 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ideas as list } from '../ideas/list';
+import { useTranslation } from 'react-i18next';
+import BackButton from '../components/BackButton';
 
-const IdeasScreen = () => {
+const IdeaListScreen = () => {
   const { t } = useTranslation();
 
   const [ideas, setIdeas] = useState([]);
@@ -83,7 +85,10 @@ const IdeasScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>My Ideas</Text>
+      <View style={styles.backButton}>
+        <BackButton />
+      </View>
+      <Text style={styles.header}>{t('my_ideas')}</Text>
       <FlatList
         data={ideas}
         keyExtractor={(item) => item.id.toString()}
@@ -96,7 +101,7 @@ const IdeasScreen = () => {
               setModalVisible(true);
             }}
           >
-            <Text style={styles.ideaText}>{item.text}</Text>
+            <Text style={styles.ideaText}>{t(item.key)}</Text>
           </TouchableOpacity>
         )}
       />
@@ -165,6 +170,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff', // Set a white background
   },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+  },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -220,4 +230,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IdeasScreen;
+export default IdeaListScreen;

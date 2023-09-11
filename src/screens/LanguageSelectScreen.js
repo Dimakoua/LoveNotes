@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LanguageSelectScreen = ({ navigation }) => {
     const { t, i18n } = useTranslation();
+
+    useEffect(() => {
+        AsyncStorage.getItem('selectedLanguage').then((selectedLanguage) => {
+            if (selectedLanguage) {
+                navigation.navigate('Ideas');
+            }
+        });
+    });
 
     const changeLanguage = async (language) => {
         // Save the selected language in AsyncStorage or any other persistent storage

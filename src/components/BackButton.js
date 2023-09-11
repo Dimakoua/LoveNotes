@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-const BackBottom = () => {
+const BackButton = () => {
     const navigation = useNavigation();
 
     // Handle the "Back" button press to navigate back to the previous screen
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BackBottom;
+export default BackButton;

@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, Text, StyleSheet, ImageBackground, Linking } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import BackBottom from '../components/BackBottom';
+import BackButton from '../components/BackButton';
 
 function IdeaDetailsScreen({ route }) {
     const { t } = useTranslation();
@@ -40,8 +40,8 @@ function IdeaDetailsScreen({ route }) {
                 style={styles.image}
                 resizeMode="cover"
             >
-                <View style={styles.backBotton}>
-                    <BackBottom />
+                <View style={styles.backButton}>
+                    <BackButton />
                 </View>
 
                 <View style={styles.ideaTextWrap}>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
     },
-    backBotton: {
+    backButton: {
         position: 'absolute',
         top: 20,
         left: 20,

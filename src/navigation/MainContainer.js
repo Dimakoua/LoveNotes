@@ -5,42 +5,27 @@ import IdeaOfTheDayScreen from '../screens/IdeaOfTheDayScreen';
 import IdeaDetailsScreen from '../screens/IdeaDetailsScreen'
 import LanguageSelectScreen from '../screens/LanguageSelectScreen'
 import SettingsScreen from '../screens/SettingsScreen'
-
+import IdeaListScreen from '../screens/IdeaListScreen';
 import { createStackNavigator } from '@react-navigation/stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //Screen names
-const ideasName = "Ideas";
+const dailyIdea = "Ideas";
 const languageSelect = "languageSelect";
 const ideaDetails = "ideaDetails";
 const Settings = "Settings";
+const ideaList = "ideaList";
 
 const Stack = createStackNavigator();
 
 function MainContainer() {
-    const [languageSelected, setLanguageSelected] = useState(false);
-
-    useEffect(() => {
-        async function fetchData() {
-            const language = await AsyncStorage.getItem('selectedLanguage');
-            return !!language; // Use double negation to convert to boolean
-        }
-
-        fetchData().then((isLanguageSelected) => {
-            setLanguageSelected(isLanguageSelected); // Set the state variable
-        });
-    }, []);
-
-
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName={languageSelect}>
-                {/* {!languageSelected ? ( */}
                 <Stack.Screen name={languageSelect} component={LanguageSelectScreen} options={{ headerShown: false }} />
-                {/* ) : null} */}
-                <Stack.Screen name={ideasName} component={IdeaOfTheDayScreen} options={{ headerShown: false }} />
+                <Stack.Screen name={dailyIdea} component={IdeaOfTheDayScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={ideaDetails} component={IdeaDetailsScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={Settings} component={SettingsScreen} options={{ headerShown: false }} />
+                <Stack.Screen name={ideaList} component={IdeaListScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -1,26 +1,32 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useTranslation } from "react-i18next";
-import BackBottom from '../components/BackBottom';
+import BackButton from '../components/BackButton';
 
 const SettingsScreen = ({ navigation }) => {
     const { t } = useTranslation();
 
     return (
         <View style={styles.container}>
-            <View style={styles.backBotton}>
-                <BackBottom />
+            <View style={styles.backButton}>
+                <BackButton />
             </View>
 
             <Text style={styles.header}>{t("Settings")}</Text>
 
             {/* Add your settings options here */}
-            <TouchableOpacity style={styles.settingOption}>
-                <Text>{t("Option 1")}</Text>
+            <TouchableOpacity
+                style={styles.settingOption}
+                onPress={() => navigation.navigate("languageSelect")}
+            >
+                <Text>{t("language_select")}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.settingOption}>
-                <Text>{t("Option 2")}</Text>
+            <TouchableOpacity
+                style={styles.settingOption}
+                onPress={() => navigation.navigate("ideaList")}
+            >
+                <Text>{t("ideas_list")}</Text>
             </TouchableOpacity>
         </View>
     );
@@ -34,7 +40,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(253, 246, 238, 0.7)',
         position: 'relative',
     },
-    backBotton: {
+    backButton: {
         position: 'absolute',
         top: 20,
         left: 20,
