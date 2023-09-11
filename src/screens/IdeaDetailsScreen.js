@@ -14,7 +14,7 @@ function IdeaDetailsScreen({ route }) {
     };
 
     const generateGoogleCalendarLink = () => {
-        const eventTitle = `Plan: ${idea.text}`;
+        const eventTitle = `Plan: ${t(idea.text)}`;
         const selectedDate = new Date();
         const startDate = selectedDate.toISOString();
         const endDate = new Date(selectedDate.getTime() + 2 * 60 * 60 * 1000).toISOString();
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     },
     ideaTextWrap: {
         position: 'absolute',
-        bottom: '3%',
+        bottom: '5%',
         left: 0,
         right: 0,
         alignItems: 'center',
