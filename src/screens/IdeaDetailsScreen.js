@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     },
     ideaTextWrap: {
         position: 'absolute',
-        bottom: 0,
+        bottom: '3%',
         left: 0,
         right: 0,
         alignItems: 'center',
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     },
     ideaText: {
         width: '80%',
+        marginBottom: 10,
         fontSize: 15,
         color: 'rgb(225, 164, 131)',
         textAlign: 'center',

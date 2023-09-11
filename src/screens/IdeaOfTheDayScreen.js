@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     paddingLeft: '3%',
     paddingRight: '3%',
+    paddingBottom: '3%',
     position: 'absolute',
     bottom: 0,
     flexDirection: 'row',
