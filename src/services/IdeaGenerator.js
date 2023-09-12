@@ -11,12 +11,26 @@ export function useIdea() {
         generateIdea();
     }, []);
 
-    const generateIdea = async () => {
+    const getIdeas = async () => {
         let ideaList = ideas;
+
         const storedIdeas = await AsyncStorage.getItem('ideas');
         if (storedIdeas !== null) {
             ideaList = JSON.parse(storedIdeas);
         }
+
+        return ideaList;
+    };
+
+    const getIdeaById = async (id) => {
+        const ideaList = await getIdeas();
+
+        const ideaIndex = ideaList.findIndex(item => item.id === id);
+        return ideaList[ideaIndex];
+    };
+
+    const generateIdea = async () => {
+        const ideaList = await getIdeas();
 
         const randomIndex = Math.floor(Math.random() * ideaList.length);
         const randomElement = ideaList[randomIndex];
@@ -49,5 +63,35 @@ export function useIdea() {
         }
     };
 
-    return { idea, nextIdea, prevIdea };
+    const saveIdeas = async (updatedIdeas) => {
+        try {
+            await AsyncStorage.setItem('ideas', JSON.stringify(updatedIdeas));
+        } catch (error) {
+            console.error('Error saving ideas:', error);
+        }
+    };
+
+    const like = async (idea) => {
+        const ideaList = await getIdeas();
+
+        const ideaIndex = ideaList.findIndex(item => item.id === idea.id);
+        if (ideaIndex !== -1) {
+            ideaList[ideaIndex].liked = !ideaList[ideaIndex].liked;
+        }
+
+        await saveIdeas(ideaList);
+    };
+
+    const markIsDone = async (idea) => {
+        const ideaList = await getIdeas();
+
+        const ideaIndex = ideaList.findIndex(item => item.id === idea.id);
+        if (ideaIndex !== -1) {
+            ideaList[ideaIndex].done = !ideaList[ideaIndex].done;
+        }
+
+        await saveIdeas(ideaList);
+    };
+
+    return { idea, nextIdea, prevIdea, saveIdeas, like, markIsDone, getIdeas, getIdeaById };
 }

@@ -10,12 +10,13 @@ import {
   SafeAreaView,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ideas as list } from '../ideas/list';
 import { useTranslation } from 'react-i18next';
 import BackButton from '../components/BackButton';
+import { useIdea } from '../services/IdeaGenerator';
 
 const IdeaListScreen = () => {
   const { t } = useTranslation();
+  const { getIdeas, saveIdeas } = useIdea();
 
   const [ideas, setIdeas] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -27,29 +28,13 @@ const IdeaListScreen = () => {
   }, []);
 
   const loadIdeas = async () => {
-    try {
-      const storedIdeas = await AsyncStorage.getItem('ideas');
-      if (storedIdeas !== null) {
-        setIdeas(JSON.parse(storedIdeas));
-      } else {
-        setIdeas(list);
-      }
-    } catch (error) {
-      console.error('Error loading ideas:', error);
-    }
-  };
-
-  const saveIdeas = async (updatedIdeas) => {
-    try {
-      await AsyncStorage.setItem('ideas', JSON.stringify(updatedIdeas));
-    } catch (error) {
-      console.error('Error saving ideas:', error);
-    }
+    const storedIdeas = await getIdeas();
+    setIdeas(storedIdeas);
   };
 
   const addIdea = () => {
     if (newIdeaText) {
-      const updatedIdeas = [...ideas, { id: Date.now(), text: newIdeaText, key: newIdeaText }];
+      const updatedIdeas = [...ideas, { id: Date.now(), text: newIdeaText, key: newIdeaText, done: false, like: false }];
       setIdeas(updatedIdeas);
       saveIdeas(updatedIdeas);
       setNewIdeaText('');
