@@ -17,11 +17,10 @@ const WishListScreen = () => {
     const { getIdeas, like, markIsDone } = useIdea();
 
     const [ideas, setIdeas] = useState(null);
-    const [render, setRender] = useState(false);
 
     useEffect(() => {
         loadIdeas();
-    }, [render]);
+    }, []);
 
     const loadIdeas = async () => {
         const storedIdeas = await getIdeas();
@@ -30,54 +29,52 @@ const WishListScreen = () => {
 
     const toggleLike = async (item) => {
         await like(item);
-        setRender(!render);
+        loadIdeas();
     };
 
     const toggleDone = async (item) => {
         await markIsDone(item);
-        setRender(!render);
+        loadIdeas();
     };
 
     const getItemBackgroundColor = (item) => {
         if (item.done) {
-            return 'rgb(150, 178, 222)'; // Колір для зробленого
+            return 'rgb(150, 178, 222)'; // Колір, коли тільки done виконується
         } else if (item.liked) {
-            return 'rgb(150, 222, 178)'; // Колір для лайку
+            return 'rgb(150, 222, 178)'; // Колір, коли тільки like виконується
         } else {
-            return 'rgba(255, 204, 204, 0.7)';
+            return 'rgba(255, 204, 204, 0.7)'; // Колір за замовчуванням
         }
     };
 
-    const renderRightActions = (item, dragX) => {
+    const renderRightActions = (item, dragX, close) => {
         return (
-            <RectButton
-                style={[
-                    styles.rightAction,
-                    styles.ideaContainer,
-                    {
-                        backgroundColor: getItemBackgroundColor(item), // Змінюємо колір фону
-                    },
-                ]}
-            >
-                <Text style={styles.actionText}>Like</Text>
-            </RectButton>
-        );
-    };
-
-    const renderLeftActions = (item, dragX) => {
-        return (
-            <RectButton
-                style={[
-                    styles.leftAction,
-                    styles.ideaContainer,
-                    {
-                        backgroundColor: getItemBackgroundColor(item), // Змінюємо колір фону
-                    },
-                ]}
-
-            >
-                <Text style={styles.actionText}>Mark as Done</Text>
-            </RectButton>
+            <View style={[styles.rightActionsContainer]}>
+                <RectButton
+                    style={[
+                        styles.rightAction,
+                        styles.ideaContainer,
+                        styles.like
+                    ]}
+                    onPress={() => {
+                        toggleLike(item);
+                    }}
+                >
+                    <Text style={[styles.actionText, styles.like]}>Like</Text>
+                </RectButton>
+                <RectButton
+                    style={[
+                        styles.rightAction,
+                        styles.ideaContainer,
+                        styles.done
+                    ]}
+                    onPress={() => {
+                        toggleDone(item);
+                    }}
+                >
+                    <Text style={[styles.actionText]}>Done</Text>
+                </RectButton>
+            </View>
         );
     };
 
@@ -92,18 +89,15 @@ const WishListScreen = () => {
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <Swipeable
-                        renderRightActions={(_, dragX) => renderRightActions(item, dragX)}
-                        renderLeftActions={(_, dragX) => renderLeftActions(item, dragX)}
-                        onSwipeableOpen={(direction) => {
-                            if (direction === 'left') {
-                                toggleDone(item);
-                            } else {
-                                toggleLike(item);
-                            }
-                        }}
+                        renderRightActions={(_, dragX, close) =>
+                            renderRightActions(item, dragX, close)
+                        }
                     >
                         <TouchableOpacity
-                            style={[styles.ideaContainer, { backgroundColor: getItemBackgroundColor(item) }]}
+                            style={[
+                                styles.ideaContainer,
+                                { backgroundColor: getItemBackgroundColor(item) },
+                            ]}
                         >
                             <Text style={styles.ideaText}>{t(item.key)}</Text>
                         </TouchableOpacity>
@@ -142,18 +136,26 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'rgb(51, 51, 51)',
     },
+    rightActionsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'stretch', // Зроблюємо кнопки повними по висоті
+    },
     rightAction: {
         justifyContent: 'center',
-        flex: 1,
-    },
-    leftAction: {
-        justifyContent: 'center',
-        flex: 1,
+        alignItems: 'center',
+        borderRadius: 10,
     },
     actionText: {
         color: 'white',
         paddingHorizontal: 10,
     },
+    done: {
+        backgroundColor: 'rgb(150, 178, 222)'
+    },
+    like: {
+        backgroundColor: 'rgb(150, 222, 178)'
+    }
 });
 
 export default WishListScreen;
