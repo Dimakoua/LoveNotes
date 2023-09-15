@@ -6,6 +6,7 @@ import IdeaDetailsScreen from '../screens/IdeaDetailsScreen'
 import LanguageSelectScreen from '../screens/LanguageSelectScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import IdeaListScreen from '../screens/IdeaListScreen';
+import WishListScreen from '../screens/WishListScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 
 //Screen names
@@ -14,6 +15,7 @@ const languageSelect = "languageSelect";
 const ideaDetails = "ideaDetails";
 const Settings = "Settings";
 const ideaList = "ideaList";
+const wishList = "wishList";
 
 const Stack = createStackNavigator();
 
@@ -26,6 +28,7 @@ function MainContainer() {
                 <Stack.Screen name={ideaDetails} component={IdeaDetailsScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={Settings} component={SettingsScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={ideaList} component={IdeaListScreen} options={{ headerShown: false }} />
+                <Stack.Screen name={wishList} component={WishListScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

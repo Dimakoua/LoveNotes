@@ -28,6 +28,13 @@ const SettingsScreen = ({ navigation }) => {
             >
                 <Text>{t("ideas_list")}</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.settingOption}
+                onPress={() => navigation.navigate("wishList")}
+            >
+                <Text>{t("wish_list")}</Text>
+            </TouchableOpacity>
         </View>
     );
 };
