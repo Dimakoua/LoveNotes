@@ -8,6 +8,7 @@ import SettingsScreen from '../screens/SettingsScreen'
 import IdeaListScreen from '../screens/IdeaListScreen';
 import WishListScreen from '../screens/WishListScreen';
 import { createStackNavigator } from '@react-navigation/stack';
+import NotificationScreen from '../screens/NotificationScreen';
 
 //Screen names
 const dailyIdea = "Ideas";
@@ -16,6 +17,7 @@ const ideaDetails = "ideaDetails";
 const Settings = "Settings";
 const ideaList = "ideaList";
 const wishList = "wishList";
+const notification = "notification";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +31,7 @@ function MainContainer() {
                 <Stack.Screen name={Settings} component={SettingsScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={ideaList} component={IdeaListScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={wishList} component={WishListScreen} options={{ headerShown: false }} />
+                <Stack.Screen name={notification} component={NotificationScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -35,6 +35,13 @@ const SettingsScreen = ({ navigation }) => {
             >
                 <Text>{t("wish_list")}</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.settingOption}
+                onPress={() => navigation.navigate("notification")}
+            >
+                <Text>{t("notification")}</Text>
+            </TouchableOpacity>
         </View>
     );
 };
