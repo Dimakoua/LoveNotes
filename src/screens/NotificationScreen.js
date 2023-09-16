@@ -93,7 +93,7 @@ const NotificationScreen = () => {
   }
 
   const handleDateChange = (event, selectedDate) => {
-    if(event.type === 'dismissed'){
+    if (event.type === 'dismissed') {
       setShowPicker(false);
       setDatePickerMode('date');
       return;
@@ -104,13 +104,12 @@ const NotificationScreen = () => {
       setDatePickerMode('time');
     }
 
-    if(datePickerMode == 'time'){
+    if (datePickerMode == 'time') {
       setShowPicker(false);
       setDatePickerMode('date');
     }
+  }
 
-    console.log(selectedDate)
-  };
 
   const cancelNotification = (id) => {
     PushNotification.cancelLocalNotification(id);
@@ -146,13 +145,13 @@ const NotificationScreen = () => {
           <View style={styles.notificationItem}>
             <Text style={styles.notificationTitle}>{item.title}</Text>
             <Text style={styles.notificationMessage}>{item.message}</Text>
-            <Text style={styles.notificationFrequency}>{t('frequency')}: {item.repeatType ?? 'none'}</Text>
+            <Text style={styles.notificationFrequency}>{t('frequency')}: {item.repeatType ?? t('none')}</Text>
 
             <TouchableOpacity
               style={styles.cancelButton}
               onPress={() => cancelNotification(item.id)}
             >
-              <Text style={styles.cancelButtonText}>{t('cancel')}</Text>
+              <Image source={require('../../assets/images/icons8-trash-50.png')} style={styles.calendarIcon} />
             </TouchableOpacity>
           </View>
         )}
@@ -188,6 +187,7 @@ const NotificationScreen = () => {
               onChangeText={(text) => setMessage(text)}
               value={message}
             />
+            <Text>{t('frequency_label')}</Text>
             <Picker
               selectedValue={interval}
               onValueChange={(itemValue, itemIndex) => setInterval(itemValue)}
@@ -199,12 +199,13 @@ const NotificationScreen = () => {
               <Picker.Item label={t('monthly')} value="monthly" />
             </Picker>
 
+            <Text>{t('start_date')}</Text>
             <TouchableOpacity
               style={styles.selectDateTimeButton}
               onPress={() => setShowPicker(true)}
             >
               <Text style={styles.selectDateTimeButtonText}>{selectedDate.toLocaleDateString() + ' ' + selectedDate.toLocaleTimeString()}</Text>
-              <Image source={require('../../assets/images/icons8-calendar-50.png')} style={styles.calendarIcon}/>
+              <Image source={require('../../assets/images/icons8-calendar-50.png')} style={styles.calendarIcon} />
             </TouchableOpacity>
 
             {showPicker && (
@@ -291,7 +292,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: 'rgb(222, 178, 150)',
-    width: 54, 
+    width: 54,
     height: 54,
     borderRadius: 32,
     justifyContent: 'center',
@@ -381,10 +382,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   cancelButton: {
-    backgroundColor: 'red',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
+    position: 'absolute',
+    top: '45%', // Змініть це значення, щоб відповідало вашим потребам
+    right: 10, // Змініть це значення, щоб відповідало вашим потребам
+    zIndex: 100,
   },
   cancelButtonText: {
     color: 'white',
