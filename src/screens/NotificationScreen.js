@@ -15,6 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useTranslation } from 'react-i18next';
 import BackButton from '../components/BackButton';
+import { Image } from '@rneui/base';
 
 const CHANNEL_ID = "defaultLocalPushesChannelId";
 
@@ -92,6 +93,12 @@ const NotificationScreen = () => {
   }
 
   const handleDateChange = (event, selectedDate) => {
+    if(event.type === 'dismissed'){
+      setShowPicker(false);
+      setDatePickerMode('date');
+      return;
+    }
+
     if (selectedDate) {
       setSelectedDate(selectedDate);
       setDatePickerMode('time');
@@ -196,7 +203,8 @@ const NotificationScreen = () => {
               style={styles.selectDateTimeButton}
               onPress={() => setShowPicker(true)}
             >
-              <Text style={styles.selectDateTimeButtonText}>{t('select_datetime')}</Text>
+              <Text style={styles.selectDateTimeButtonText}>{selectedDate.toLocaleDateString() + ' ' + selectedDate.toLocaleTimeString()}</Text>
+              <Image source={require('../../assets/images/icons8-calendar-50.png')} style={styles.calendarIcon}/>
             </TouchableOpacity>
 
             {showPicker && (
@@ -360,13 +368,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   selectDateTimeButton: {
-    backgroundColor: 'rgb(150, 178, 222)',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 8,
   },
   selectDateTimeButtonText: {
-    color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -383,6 +392,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  calendarIcon: {
+    width: 35,
+    height: 35
+  }
 });
 
 export default NotificationScreen;

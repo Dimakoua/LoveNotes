@@ -118,34 +118,32 @@ const IdeaListScreen = () => {
               value={newIdeaText}
               multiline={true}
             />
-            <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[styles.modalButton, styles.saveButton]}
+              onPress={selectedIdea ? editIdea : addIdea}
+            >
+              <Text style={styles.modalButtonText}>
+                {selectedIdea ? 'Save' : 'Add'}
+              </Text>
+            </TouchableOpacity>
+            {selectedIdea && (
               <TouchableOpacity
-                style={[styles.modalButton, styles.saveButton]}
-                onPress={selectedIdea ? editIdea : addIdea}
+                style={[styles.modalButton, styles.deleteButton]}
+                onPress={deleteIdea}
               >
-                <Text style={styles.modalButtonText}>
-                  {selectedIdea ? 'Save' : 'Add'}
-                </Text>
+                <Text style={styles.modalButtonText}>{t('Delete')}</Text>
               </TouchableOpacity>
-              {selectedIdea && (
-                <TouchableOpacity
-                  style={[styles.modalButton, styles.deleteButton]}
-                  onPress={deleteIdea}
-                >
-                  <Text style={styles.modalButtonText}>{t('Delete')}</Text>
-                </TouchableOpacity>
-              )}
-              <TouchableOpacity
-                style={[styles.modalButton, styles.closeButton]}
-                onPress={() => {
-                  setModalVisible(false);
-                  setSelectedIdea(null);
-                  setNewIdeaText('');
-                }}
-              >
-                <Text style={styles.modalButtonText}>{t('Close')}</Text>
-              </TouchableOpacity>
-            </View>
+            )}
+            <TouchableOpacity
+              style={[styles.modalButton, styles.closeButton]}
+              onPress={() => {
+                setModalVisible(false);
+                setSelectedIdea(null);
+                setNewIdeaText('');
+              }}
+            >
+              <Text style={styles.modalButtonText}>{t('Close')}</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -232,11 +230,11 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   modalButton: {
-    flex: 1,
-    padding: 12,
-    borderRadius: 5,
-    marginHorizontal: 8,
     alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8,
+    marginBottom: 10,
   },
   modalButtonText: {
     fontSize: 14,
