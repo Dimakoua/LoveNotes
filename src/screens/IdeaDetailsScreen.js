@@ -34,8 +34,8 @@ function IdeaDetailsScreen({ route }) {
     const generateGoogleCalendarLink = () => {
         const eventTitle = `Plan: ${t(idea.key)}`;
         const selectedDate = new Date();
-        const startDate = selectedDate.toISOString();
-        const endDate = new Date(selectedDate.getTime() + 2 * 60 * 60 * 1000).toISOString();
+        const startDate = selectedDate.toDateString();
+        const endDate = new Date(selectedDate.getTime() + 2 * 60 * 60 * 1000).toDateString();
         const eventDescription = '';
         const eventLocation = 'Your Location';
 
