@@ -12,18 +12,20 @@ import {
 import { Picker } from '@react-native-picker/picker';
 import PushNotification from 'react-native-push-notification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const NotificationScreen = () => {
     const [message, setMessage] = useState('');
-    const [notificationTitle, setNotificationTitle] = useState(''); // Додали стан для заголовку сповіщення
+    const [notificationTitle, setNotificationTitle] = useState('');
     const [interval, setInterval] = useState('daily');
     const [modalVisible, setModalVisible] = useState(false);
     const [notifications, setNotifications] = useState([]);
     const [storedNotifications, setStoredNotifications] = useState([]);
+    const [showPicker, setShowPicker] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     useEffect(() => {
-
-        // Завантаження збережених сповіщень під час завантаження компонента
         loadStoredNotifications();
     }, []);
 
@@ -49,26 +51,26 @@ const NotificationScreen = () => {
 
     const scheduleNotification = () => {
         const currentDate = new Date();
-        const date = new Date(currentDate.getTime() + 10000);
 
-        console.log('Scheduled time:', date);
+        console.log('Scheduled time:', selectedDate);
 
         PushNotification.localNotificationSchedule({
             id: '1',
-            title: notificationTitle, // Використовуємо введений заголовок сповіщення
+            title: notificationTitle,
             message: message,
             channelId: 'defaultLocalPushesChannelId',
             repeatType: 'time',
             repeatTime: 2000,
-            date: date,
+            date: selectedDate,
         });
 
         const newNotification = {
-            id: date.getTime().toString(),
-            title: notificationTitle, // Додали заголовок сповіщення
+            id: selectedDate.getTime().toString(),
+            title: notificationTitle,
             message: message,
             channelId: 'defaultLocalPushesChannelId',
-            date: date,
+            date: selectedDate,
+            frequency: interval,
         };
 
         const updatedNotifications = [...storedNotifications, newNotification];
@@ -77,8 +79,15 @@ const NotificationScreen = () => {
 
         setModalVisible(false);
         setMessage('');
-        setNotificationTitle(''); // Очищаємо заголовок сповіщення
+        setNotificationTitle('');
         setInterval('daily');
+    };
+
+    const handleDateChange = (event, selectedDate) => {
+        setShowPicker(false);
+        if (selectedDate) {
+            setSelectedDate(selectedDate);
+        }
     };
 
     return (
@@ -92,6 +101,7 @@ const NotificationScreen = () => {
                     <View style={styles.notificationItem}>
                         <Text style={styles.notificationTitle}>{item.title}</Text>
                         <Text style={styles.notificationMessage}>{item.message}</Text>
+                        <Text style={styles.notificationFrequency}>Frequency: {item.frequency}</Text>
                     </View>
                 )}
             />
@@ -117,8 +127,8 @@ const NotificationScreen = () => {
                         <TextInput
                             style={styles.input}
                             placeholder="Enter your title"
-                            onChangeText={(text) => setNotificationTitle(text)} // Додали поле для заголовку сповіщення
-                            value={notificationTitle} // Використовуємо введений заголовок
+                            onChangeText={(text) => setNotificationTitle(text)}
+                            value={notificationTitle}
                         />
                         <TextInput
                             style={styles.input}
@@ -137,6 +147,23 @@ const NotificationScreen = () => {
                         </Picker>
 
                         <TouchableOpacity
+                            style={styles.selectDateTimeButton}
+                            onPress={() => setShowPicker(true)}
+                        >
+                            <Text style={styles.selectDateTimeButtonText}>Select Date & Time</Text>
+                        </TouchableOpacity>
+
+                        {showPicker && (
+                            <DateTimePicker
+                                value={selectedDate}
+                                mode="time"
+                                is24Hour={true}
+                                display="default"
+                                onChange={handleDateChange}
+                            />
+                        )}
+
+                        <TouchableOpacity
                             style={styles.saveButton}
                             onPress={scheduleNotification}
                         >
@@ -147,7 +174,7 @@ const NotificationScreen = () => {
                             onPress={() => {
                                 setModalVisible(false);
                                 setMessage('');
-                                setNotificationTitle(''); // Очищаємо заголовок сповіщення
+                                setNotificationTitle('');
                                 setInterval('daily');
                             }}
                         >
