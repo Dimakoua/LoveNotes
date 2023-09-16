@@ -15,6 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const NotificationScreen = () => {
     const [message, setMessage] = useState('');
+    const [notificationTitle, setNotificationTitle] = useState(''); // Додали стан для заголовку сповіщення
     const [interval, setInterval] = useState('daily');
     const [modalVisible, setModalVisible] = useState(false);
     const [notifications, setNotifications] = useState([]);
@@ -54,17 +55,17 @@ const NotificationScreen = () => {
 
         PushNotification.localNotificationSchedule({
             id: '1',
-            title: 'Scheduled Notification',
+            title: notificationTitle, // Використовуємо введений заголовок сповіщення
             message: message,
             channelId: 'defaultLocalPushesChannelId',
-            // repeatType: 'time',
-            // repeatTime: 2000,
+            repeatType: 'time',
+            repeatTime: 2000,
             date: date,
         });
 
         const newNotification = {
             id: date.getTime().toString(),
-            title: 'Scheduled Notification',
+            title: notificationTitle, // Додали заголовок сповіщення
             message: message,
             channelId: 'defaultLocalPushesChannelId',
             date: date,
@@ -76,6 +77,7 @@ const NotificationScreen = () => {
 
         setModalVisible(false);
         setMessage('');
+        setNotificationTitle(''); // Очищаємо заголовок сповіщення
         setInterval('daily');
     };
 
@@ -114,6 +116,12 @@ const NotificationScreen = () => {
                         <Text style={styles.modalHeader}>Schedule Notification</Text>
                         <TextInput
                             style={styles.input}
+                            placeholder="Enter your title"
+                            onChangeText={(text) => setNotificationTitle(text)} // Додали поле для заголовку сповіщення
+                            value={notificationTitle} // Використовуємо введений заголовок
+                        />
+                        <TextInput
+                            style={styles.input}
                             placeholder="Enter your message"
                             onChangeText={(text) => setMessage(text)}
                             value={message}
@@ -139,6 +147,7 @@ const NotificationScreen = () => {
                             onPress={() => {
                                 setModalVisible(false);
                                 setMessage('');
+                                setNotificationTitle(''); // Очищаємо заголовок сповіщення
                                 setInterval('daily');
                             }}
                         >
