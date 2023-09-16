@@ -12,15 +12,15 @@ import {
 import { Picker } from '@react-native-picker/picker';
 import PushNotification from 'react-native-push-notification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+
+const CHANNEL_ID = "defaultLocalPushesChannelId";
 
 const NotificationScreen = () => {
     const [message, setMessage] = useState('');
     const [notificationTitle, setNotificationTitle] = useState('');
     const [interval, setInterval] = useState('daily');
     const [modalVisible, setModalVisible] = useState(false);
-    const [notifications, setNotifications] = useState([]);
     const [storedNotifications, setStoredNotifications] = useState([]);
     const [showPicker, setShowPicker] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -50,38 +50,32 @@ const NotificationScreen = () => {
     };
 
     const scheduleNotification = () => {
-        const currentDate = new Date();
-
         console.log('Scheduled time:', selectedDate);
-
-        PushNotification.localNotificationSchedule({
-            id: '1',
-            title: notificationTitle,
-            message: message,
-            channelId: 'defaultLocalPushesChannelId',
-            repeatType: 'time',
-            repeatTime: 2000,
-            date: selectedDate,
-        });
 
         const newNotification = {
             id: selectedDate.getTime().toString(),
             title: notificationTitle,
             message: message,
-            channelId: 'defaultLocalPushesChannelId',
+            channelId: CHANNEL_ID,
             date: selectedDate,
             frequency: interval,
         };
+
+        PushNotification.localNotificationSchedule(newNotification);
 
         const updatedNotifications = [...storedNotifications, newNotification];
         setStoredNotifications(updatedNotifications);
         saveNotifications(updatedNotifications);
 
+        resetModalForm();
+    };
+
+    const resetModalForm = () => {
         setModalVisible(false);
         setMessage('');
         setNotificationTitle('');
         setInterval('daily');
-    };
+    }
 
     const handleDateChange = (event, selectedDate) => {
         setShowPicker(false);
