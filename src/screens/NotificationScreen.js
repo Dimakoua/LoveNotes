@@ -1,10 +1,8 @@
-// Замініть кнопку "Add Notification" на власну компоненту для кращого стилю
-
 import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
-    TouchableOpacity, // Замінили Button на TouchableOpacity
+    TouchableOpacity,
     Modal,
     TextInput,
     FlatList,
@@ -13,13 +11,40 @@ import {
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import PushNotification from 'react-native-push-notification';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const NotificationScreen = () => {
     const [message, setMessage] = useState('');
-    const [selectedTime, setSelectedTime] = useState(new Date());
     const [interval, setInterval] = useState('daily');
     const [modalVisible, setModalVisible] = useState(false);
     const [notifications, setNotifications] = useState([]);
+    const [storedNotifications, setStoredNotifications] = useState([]);
+
+    useEffect(() => {
+
+        // Завантаження збережених сповіщень під час завантаження компонента
+        loadStoredNotifications();
+    }, []);
+
+    const loadStoredNotifications = async () => {
+        try {
+            const storedData = await AsyncStorage.getItem('notifications');
+            if (storedData) {
+                const parsedData = JSON.parse(storedData);
+                setStoredNotifications(parsedData);
+            }
+        } catch (error) {
+            console.error('Error loading stored notifications:', error);
+        }
+    };
+
+    const saveNotifications = async (data) => {
+        try {
+            await AsyncStorage.setItem('notifications', JSON.stringify(data));
+        } catch (error) {
+            console.error('Error saving notifications:', error);
+        }
+    };
 
     const scheduleNotification = () => {
         const currentDate = new Date();
@@ -31,9 +56,9 @@ const NotificationScreen = () => {
             id: '1',
             title: 'Scheduled Notification',
             message: message,
-            channelId: "defaultLocalPushesChannelId",
-            repeatType: 'time',//'day',
-            repeatTime: 2000,
+            channelId: 'defaultLocalPushesChannelId',
+            // repeatType: 'time',
+            // repeatTime: 2000,
             date: date,
         });
 
@@ -41,15 +66,17 @@ const NotificationScreen = () => {
             id: date.getTime().toString(),
             title: 'Scheduled Notification',
             message: message,
-            channelId: "defaultLocalPushesChannelId",
+            channelId: 'defaultLocalPushesChannelId',
             date: date,
         };
 
-        setNotifications([...notifications, newNotification]);
+        const updatedNotifications = [...storedNotifications, newNotification];
+        setStoredNotifications(updatedNotifications);
+        saveNotifications(updatedNotifications);
 
         setModalVisible(false);
         setMessage('');
-        setSelectedTime(new Date());
+        setInterval('daily');
     };
 
     return (
@@ -57,7 +84,7 @@ const NotificationScreen = () => {
             <Text style={styles.header}>My Notifications</Text>
 
             <FlatList
-                data={notifications}
+                data={storedNotifications}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <View style={styles.notificationItem}>
@@ -68,7 +95,6 @@ const NotificationScreen = () => {
             />
 
             <View style={styles.addButtonContainer}>
-                {/* Замінили Button на TouchableOpacity */}
                 <TouchableOpacity
                     style={styles.addButton}
                     onPress={() => setModalVisible(true)}
@@ -102,18 +128,18 @@ const NotificationScreen = () => {
                             <Picker.Item label="Monthly" value="monthly" />
                         </Picker>
 
-                        <TouchableOpacity // Замінили Button на TouchableOpacity
+                        <TouchableOpacity
                             style={styles.saveButton}
                             onPress={scheduleNotification}
                         >
                             <Text style={styles.saveButtonText}>Save</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity // Замінили Button на TouchableOpacity
+                        <TouchableOpacity
                             style={styles.closeButton}
                             onPress={() => {
                                 setModalVisible(false);
                                 setMessage('');
-                                setSelectedTime(new Date());
+                                setInterval('daily');
                             }}
                         >
                             <Text style={styles.closeButtonText}>Close</Text>
@@ -152,16 +178,14 @@ const styles = StyleSheet.create({
     },
     addButtonContainer: {
         marginTop: 16,
-        alignItems: 'center', // Додали вирівнювання по центру
+        alignItems: 'center',
     },
-    // Стиль кнопки додавання
     addButton: {
         backgroundColor: 'rgb(222, 178, 150)',
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 8,
     },
-    // Стиль тексту кнопки додавання
     addButtonLabel: {
         color: 'white',
         fontSize: 16,
@@ -198,7 +222,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginBottom: 16,
     },
-    // Стиль кнопки Save
     saveButton: {
         backgroundColor: 'rgb(222, 178, 150)',
         paddingHorizontal: 20,
@@ -206,21 +229,18 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginBottom: 10,
     },
-    // Стиль тексту кнопки Save
     saveButtonText: {
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
     },
-    // Стиль кнопки Close
     closeButton: {
         backgroundColor: 'gray',
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 8,
     },
-    // Стиль тексту кнопки Close
     closeButtonText: {
         color: 'white',
         fontSize: 16,
