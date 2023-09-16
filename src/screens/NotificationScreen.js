@@ -56,16 +56,12 @@ const NotificationScreen = () => {
     }
 
     const scheduleNotification = () => {
-        console.log('Scheduled time:', selectedDate);
-
         const newNotification = {
             id: getRandomInt(1, 10000),
             title: notificationTitle,
             message: message,
             channelId: CHANNEL_ID,
             date: selectedDate,
-            repeatType: 'time',
-            repeatTime: 2000,
         };
 
         if (interval) {
@@ -76,15 +72,6 @@ const NotificationScreen = () => {
         console.log(newNotification)
 
         PushNotification.localNotificationSchedule(newNotification);
-        // PushNotification.localNotificationSchedule({
-        //     id: '1',
-        //     title: notificationTitle,
-        //     message: message,
-        //     channelId: 'defaultLocalPushesChannelId',
-        //     repeatType: 'time',
-        //     repeatTime: 2000,
-        //     date: selectedDate,
-        // });
 
         const updatedNotifications = [...storedNotifications, newNotification];
         setStoredNotifications(updatedNotifications);
@@ -97,7 +84,7 @@ const NotificationScreen = () => {
         setModalVisible(false);
         setMessage('');
         setNotificationTitle('');
-        setInterval('daily');
+        setInterval(null);
     }
 
     const handleDateChange = (event, selectedDate) => {
@@ -133,7 +120,7 @@ const NotificationScreen = () => {
             )}
             <FlatList
                 data={storedNotifications}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <View style={styles.notificationItem}>
                         <Text style={styles.notificationTitle}>{item.title}</Text>
@@ -203,9 +190,9 @@ const NotificationScreen = () => {
                                 value={selectedDate}
                                 mode="time"
                                 is24Hour={true}
-                                display="spinner" // Змінимо display з "default" на "spinner"
+                                display="spinner"
                                 onChange={handleDateChange}
-                                style={styles.dateTimePicker} // Додамо стиль для тайм пікера
+                                style={styles.dateTimePicker}
                             />
                         )}
 
@@ -218,10 +205,7 @@ const NotificationScreen = () => {
                         <TouchableOpacity
                             style={styles.closeButton}
                             onPress={() => {
-                                setModalVisible(false);
-                                setMessage('');
-                                setNotificationTitle('');
-                                setInterval('daily');
+                                resetModalForm();
                             }}
                         >
                             <Text style={styles.closeButtonText}>Close</Text>
@@ -244,6 +228,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 16,
         color: 'rgb(222, 178, 150)',
+    },
+    clearAllButton: {
+        backgroundColor: 'rgb(222, 178, 150)',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 8,
+        marginBottom: 16,
+    },
+    clearAllButtonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     notificationItem: {
         backgroundColor: 'rgba(255, 204, 204, 0.7)',
@@ -336,13 +333,25 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     selectDateTimeButton: {
-        backgroundColor: 'rgb(150, 178, 222)', // Колір фону
+        backgroundColor: 'rgb(150, 178, 222)',
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 8,
     },
     selectDateTimeButtonText: {
-        color: 'white', // Колір тексту
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    cancelButton: {
+        backgroundColor: 'red',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 8,
+    },
+    cancelButtonText: {
+        color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
