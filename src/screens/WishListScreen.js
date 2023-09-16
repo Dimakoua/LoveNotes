@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     View,
     Text,
@@ -26,6 +26,7 @@ const WishListScreen = () => {
     const [isEditingSearch, setIsEditingSearch] = useState(false); // Додавання стану для визначення режиму редагування пошуку
 
     const navigation = useNavigation();
+    const searchInputRef = useRef();
 
     useEffect(() => {
         loadIdeas();
@@ -52,6 +53,12 @@ const WishListScreen = () => {
     const toggleDone = async (item) => {
         await markIsDone(item);
         loadIdeas();
+    };
+
+    const focusSearchInput = () => {
+        if (searchInputRef.current) {
+            setTimeout(() => searchInputRef.current.focus(), 100)
+        }
     };
 
     const getItemBackgroundColor = (item) => {
@@ -103,25 +110,37 @@ const WishListScreen = () => {
                 <BackButton />
             </View>
             <TouchableOpacity
-                onPress={() => setIsEditingSearch(!isEditingSearch)}
+                onPress={() => {
+                    setIsEditingSearch(!isEditingSearch);
+                    focusSearchInput();
+                }}
                 style={styles.searchButton}
             >
                 <Image source={require('../../assets/images/icons8-search-30.png')} style={styles.image} />
             </TouchableOpacity>
 
             <View style={styles.headerWrap}>
-                {isEditingSearch ? ( // Відображати поле пошуку, якщо isEditingSearch === true
-                    <TextInput
-                        style={[styles.searchInput]}
-                        placeholder={t('search')}
-                        value={searchText}
-                        onChangeText={(text) => setSearchText(text)} 
-                    />
-                ) : (
-                    <Text style={styles.header}>
-                        {t('wish_list')}
-                    </Text>
-                )}
+                {/* {isEditingSearch ? ( // Відображати поле пошуку, якщо isEditingSearch === true */}
+                <TextInput
+                    ref={searchInputRef}
+                    style={[
+                        styles.searchInput,
+                        isEditingSearch ? null : styles.hidden,
+                    ]}
+                    placeholder={t('search')}
+                    value={searchText}
+                    blurOnSubmit={false}
+                    onChangeText={(text) => setSearchText(text)}
+                />
+                {/* ) : ( */}
+                <Text style={[
+                    styles.header,
+                    isEditingSearch ? styles.hidden : null,
+                ]}>
+                    {t('wish_list')}
+                </Text>
+                {/* ) */}
+                {/* } */}
             </View>
             <View style={styles.filterButtons}>
                 <TouchableOpacity
@@ -274,6 +293,9 @@ const styles = StyleSheet.create({
     },
     headerWrap: {
         height: 50
+    },
+    hidden: {
+        display: 'none'
     }
 });
 
