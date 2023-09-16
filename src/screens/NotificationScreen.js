@@ -114,7 +114,7 @@ const NotificationScreen = () => {
       <View style={styles.backButton}>
         <BackButton />
       </View>
-      <Text style={styles.header}>{t('my_otifications')}</Text>
+      <Text style={styles.header}>{t('my_notifications')}</Text>
       {storedNotifications.length > 0 && (
         <TouchableOpacity
           style={styles.clearAllButton}
@@ -136,7 +136,7 @@ const NotificationScreen = () => {
               style={styles.cancelButton}
               onPress={() => cancelNotification(item.id)}
             >
-              <Text style={styles.cancelButtonText}>Cancel</Text>
+              <Text style={styles.cancelButtonText}>{t('cancel')}</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -162,13 +162,13 @@ const NotificationScreen = () => {
             <Text style={styles.modalHeader}>{t('schedule_notification')}</Text>
             <TextInput
               style={styles.input}
-              placeholder="Enter your title"
+              placeholder={t('enter_title')}
               onChangeText={(text) => setNotificationTitle(text)}
               value={notificationTitle}
             />
             <TextInput
               style={styles.input}
-              placeholder="Enter your message"
+              placeholder={t('enter_message')}
               onChangeText={(text) => setMessage(text)}
               value={message}
             />
@@ -177,10 +177,10 @@ const NotificationScreen = () => {
               onValueChange={(itemValue, itemIndex) => setInterval(itemValue)}
               style={styles.picker}
             >
-              <Picker.Item label="None" value={null} />
-              <Picker.Item label="Daily" value="daily" />
-              <Picker.Item label="Weekly" value="weekly" />
-              <Picker.Item label="Monthly" value="monthly" />
+              <Picker.Item label={t('none')} value={null} />
+              <Picker.Item label={t('daily')} value="daily" />
+              <Picker.Item label={t('weekly')} value="weekly" />
+              <Picker.Item label={t('monthly')} value="monthly" />
             </Picker>
 
             <TouchableOpacity
@@ -226,9 +226,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(253, 246, 238, 0.7)', // Same background color as SettingsScreen
+    backgroundColor: 'rgba(253, 246, 238, 0.7)',
   },
   backButton: {
     position: 'absolute',
@@ -239,7 +237,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
-    color: 'rgb(222, 178, 150)', // Same header color as SettingsScreen
+    color: 'rgb(222, 178, 150)',
+    textAlign: 'center',
   },
   clearAllButton: {
     backgroundColor: 'rgb(222, 178, 150)',
@@ -255,10 +254,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   notificationItem: {
-    backgroundColor: 'rgba(255, 204, 204, 0.7)', // Same background color as SettingsScreen
+    backgroundColor: 'rgba(255, 204, 204, 0.7)',
     padding: 16,
     borderRadius: 8,
     marginBottom: 16,
+    width: '100%',
   },
   notificationTitle: {
     fontSize: 18,
