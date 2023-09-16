@@ -20,7 +20,7 @@ const WishListScreen = () => {
     const { getIdeas, like, markIsDone } = useIdea();
 
     const [ideas, setIdeas] = useState(null);
-    const [showLiked, setShowLiked] = useState(false);
+    const [showLiked, setShowLiked] = useState(true);
     const [showDone, setShowDone] = useState(false);
     const [searchText, setSearchText] = useState(''); // Додавання стану для текстового пошуку
     const [isEditingSearch, setIsEditingSearch] = useState(false); // Додавання стану для визначення режиму редагування пошуку

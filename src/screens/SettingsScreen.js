@@ -12,7 +12,7 @@ const SettingsScreen = ({ navigation }) => {
                 <BackButton />
             </View>
 
-            <Text style={styles.header}>{t("Settings")}</Text>
+            <Text style={styles.header}>{t("settings")}</Text>
 
             {/* Add your settings options here */}
             <TouchableOpacity

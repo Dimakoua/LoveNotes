@@ -28,6 +28,7 @@ const NotificationScreen = () => {
   const [storedNotifications, setStoredNotifications] = useState([]);
   const [showPicker, setShowPicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [datePickerMode, setDatePickerMode] = useState('date');
 
   useEffect(() => {
     loadStoredNotifications();
@@ -87,13 +88,21 @@ const NotificationScreen = () => {
     setMessage('');
     setNotificationTitle('');
     setInterval(null);
+    setDatePickerMode('date');
   }
 
   const handleDateChange = (event, selectedDate) => {
-    setShowPicker(false);
     if (selectedDate) {
       setSelectedDate(selectedDate);
+      setDatePickerMode('time');
     }
+
+    if(datePickerMode == 'time'){
+      setShowPicker(false);
+      setDatePickerMode('date');
+    }
+
+    console.log(selectedDate)
   };
 
   const cancelNotification = (id) => {
@@ -147,7 +156,7 @@ const NotificationScreen = () => {
           style={styles.addButton}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.addButtonLabel}>{t('add_notification')}</Text>
+          <Text style={styles.addButtonLabel}>+</Text>
         </TouchableOpacity>
       </View>
 
@@ -193,7 +202,7 @@ const NotificationScreen = () => {
             {showPicker && (
               <DateTimePicker
                 value={selectedDate}
-                mode="time"
+                mode={datePickerMode}
                 is24Hour={true}
                 display="spinner"
                 onChange={handleDateChange}
@@ -232,6 +241,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 20,
     left: 20,
+    zIndex: 100
   },
   header: {
     fontSize: 24,
@@ -273,9 +283,14 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: 'rgb(222, 178, 150)',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
+    width: 54, 
+    height: 54,
+    borderRadius: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 16,
+    right: 16,
   },
   addButtonLabel: {
     color: 'white',
