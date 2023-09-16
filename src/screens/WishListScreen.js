@@ -20,8 +20,8 @@ const WishListScreen = () => {
     const { getIdeas, like, markIsDone } = useIdea();
 
     const [ideas, setIdeas] = useState(null);
-    const [showLiked, setShowLiked] = useState(true);
-    const [showDone, setShowDone] = useState(true);
+    const [showLiked, setShowLiked] = useState(false);
+    const [showDone, setShowDone] = useState(false);
     const [searchText, setSearchText] = useState(''); // Додавання стану для текстового пошуку
     const [isEditingSearch, setIsEditingSearch] = useState(false); // Додавання стану для визначення режиму редагування пошуку
 
@@ -118,8 +118,7 @@ const WishListScreen = () => {
                         style={[styles.searchInput]}
                         placeholder={t('search')}
                         value={searchText}
-                        onChangeText={(text) => setSearchText(text)} // Оновлення стану текстового пошуку
-                        onBlur={() => setIsEditingSearch(false)} // Змінити режим редагування після втрати фокусу
+                        onChangeText={(text) => setSearchText(text)} 
                     />
                 ) : (
                     <Text style={styles.header}>
@@ -140,7 +139,7 @@ const WishListScreen = () => {
                             showLiked ? styles.activeFilterButtonText : styles.filterButtonText,
                         ]}
                     >
-                        {t('liked')}
+                        {t('like')}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
