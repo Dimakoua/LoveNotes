@@ -41,9 +41,6 @@ const WishListScreen = () => {
                 (t(item.key).toLowerCase().includes(searchText.toLowerCase()) || item.text.toLowerCase().includes(searchText.toLowerCase())) // Додати фільтрацію за текстовим пошуком
             );
         });
-
-        console.log(filteredIdeas)
-
         setIdeas(filteredIdeas);
     };
 
