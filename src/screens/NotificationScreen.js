@@ -19,7 +19,7 @@ const CHANNEL_ID = "defaultLocalPushesChannelId";
 const NotificationScreen = () => {
     const [message, setMessage] = useState('');
     const [notificationTitle, setNotificationTitle] = useState('');
-    const [interval, setInterval] = useState('daily');
+    const [interval, setInterval] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
     const [storedNotifications, setStoredNotifications] = useState([]);
     const [showPicker, setShowPicker] = useState(false);
@@ -49,19 +49,42 @@ const NotificationScreen = () => {
         }
     };
 
+    const getRandomInt = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
     const scheduleNotification = () => {
         console.log('Scheduled time:', selectedDate);
 
         const newNotification = {
-            id: selectedDate.getTime().toString(),
+            id: getRandomInt(1, 10000),
             title: notificationTitle,
             message: message,
             channelId: CHANNEL_ID,
             date: selectedDate,
-            frequency: interval,
+            repeatType: 'time',
+            repeatTime: 2000,
         };
 
+        if (interval) {
+            newNotification.repeatType = interval;
+            newNotification.repeatTime = 1;
+        }
+
+        console.log(newNotification)
+
         PushNotification.localNotificationSchedule(newNotification);
+        // PushNotification.localNotificationSchedule({
+        //     id: '1',
+        //     title: notificationTitle,
+        //     message: message,
+        //     channelId: 'defaultLocalPushesChannelId',
+        //     repeatType: 'time',
+        //     repeatTime: 2000,
+        //     date: selectedDate,
+        // });
 
         const updatedNotifications = [...storedNotifications, newNotification];
         setStoredNotifications(updatedNotifications);
@@ -84,10 +107,30 @@ const NotificationScreen = () => {
         }
     };
 
+    const cancelNotification = (id) => {
+        PushNotification.cancelLocalNotification(id);
+        const updatedNotifications = storedNotifications.filter(notification => notification.id !== id);
+        setStoredNotifications(updatedNotifications);
+        saveNotifications(updatedNotifications);
+    };
+
+    const clearAllNotifications = () => {
+        PushNotification.cancelAllLocalNotifications();
+        setStoredNotifications([]);
+        saveNotifications([]);
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.header}>My Notifications</Text>
-
+            {storedNotifications.length > 0 && (
+                <TouchableOpacity
+                    style={styles.clearAllButton}
+                    onPress={clearAllNotifications}
+                >
+                    <Text style={styles.clearAllButtonText}>Clear All Notifications</Text>
+                </TouchableOpacity>
+            )}
             <FlatList
                 data={storedNotifications}
                 keyExtractor={(item) => item.id}
@@ -95,7 +138,14 @@ const NotificationScreen = () => {
                     <View style={styles.notificationItem}>
                         <Text style={styles.notificationTitle}>{item.title}</Text>
                         <Text style={styles.notificationMessage}>{item.message}</Text>
-                        <Text style={styles.notificationFrequency}>Frequency: {item.frequency}</Text>
+                        <Text style={styles.notificationFrequency}>Frequency: {item.repeatType ?? 'none'}</Text>
+
+                        <TouchableOpacity
+                            style={styles.cancelButton}
+                            onPress={() => cancelNotification(item.id)}
+                        >
+                            <Text style={styles.cancelButtonText}>Cancel</Text>
+                        </TouchableOpacity>
                     </View>
                 )}
             />
@@ -135,6 +185,7 @@ const NotificationScreen = () => {
                             onValueChange={(itemValue, itemIndex) => setInterval(itemValue)}
                             style={styles.picker}
                         >
+                            <Picker.Item label="None" value={null} />
                             <Picker.Item label="Daily" value="daily" />
                             <Picker.Item label="Weekly" value="weekly" />
                             <Picker.Item label="Monthly" value="monthly" />
