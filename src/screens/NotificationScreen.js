@@ -152,8 +152,9 @@ const NotificationScreen = () => {
                                 value={selectedDate}
                                 mode="time"
                                 is24Hour={true}
-                                display="default"
+                                display="spinner" // Змінимо display з "default" на "spinner"
                                 onChange={handleDateChange}
+                                style={styles.dateTimePicker} // Додамо стиль для тайм пікера
                             />
                         )}
 
@@ -273,6 +274,24 @@ const styles = StyleSheet.create({
     },
     closeButtonText: {
         color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    dateTimePicker: {
+        marginTop: 16,
+        borderColor: '#ddd',
+        borderRadius: 8,
+        borderWidth: 1,
+    },
+    selectDateTimeButton: {
+        backgroundColor: 'rgb(150, 178, 222)', // Колір фону
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 8,
+    },
+    selectDateTimeButtonText: {
+        color: 'white', // Колір тексту
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
