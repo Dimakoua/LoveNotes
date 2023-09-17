@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground, Animated } from 'react-native';
 import { useIdea } from '../services/IdeaGenerator';
 import { useTranslation } from "react-i18next";
 import SquareBlockWithArrows from '../components/SquareBlockWithArrows';
 import { PanGestureHandler } from 'react-native-gesture-handler';
-import { TouchableWithoutFeedback } from 'react-native';
 
 const IdeaOfTheDayScreen = ({ navigation }) => {
   const { t } = useTranslation();
-  const { idea, nextIdea, prevIdea } = useIdea();
+  const { idea, nextIdea, prevIdea, like } = useIdea();
+
   const [tapCount, setTapCount] = useState(0); // Лічильник тапів
   const [tapTimer, setTapTimer] = useState(null); // Таймер для тапів
+  const [showLikeMessage, setShowLikeMessage] = useState(false); // State to control the like message
 
   const selectImage = () => {
     return require('../../assets/images/6.png');
@@ -24,15 +25,53 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
 
   const onSwipeEnd = (event) => {
     if (offsetX > 50) {
+      console.log("PREV")
       prevIdea();
     } else if (offsetX < -50) {
+      console.log("EKEKEKEK")
       nextIdea();
     }
 
-    if (offsetX < 10) {
+    if (offsetX < 5) {
       handleTap();
     }
     offsetX = 0;
+  };
+
+  // Create an animated value
+  const likeOpacity = new Animated.Value(0); // Initialize with 0 opacity
+  const likeScale = new Animated.Value(0.5); // Initialize with 0 scale
+  // Function to show the like message
+  const showLike = () => {
+    setShowLikeMessage(true);
+
+    // Animate the like image opacity
+    Animated.timing(likeOpacity, {
+      toValue: 1, // Animate to full opacity
+      duration: 500, // Animation duration in milliseconds
+      useNativeDriver: true, // Use native driver for performance
+    }).start(); // Start the animation
+
+    // Scale animation
+    Animated.sequence([
+      Animated.timing(likeScale, {
+        toValue: 1, // Scale to 100% (original size)
+        duration: 2000, // Animation duration in milliseconds
+        useNativeDriver: true,
+      }),
+      Animated.timing(likeOpacity, {
+        toValue: 0, // Scale back to 0% (hidden)
+        duration: 200, // Animation duration in milliseconds
+        useNativeDriver: true,
+        delay: 1500, // Delay before hiding
+      }),
+    ]).start(() => { });
+
+    // Hide the like message and reset opacity after 2 seconds
+    setTimeout(() => {
+      setShowLikeMessage(false);
+      likeOpacity.setValue(0); // Reset opacity
+    }, 2000);
   };
 
   const handleTap = () => {
@@ -41,7 +80,8 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
     setTapTimer(
       setTimeout(() => {
         if (tapCount === 2) {
-          console.log("KSSKKSKSKSKKSS")
+          showLike();
+          like(idea);
         }
         setTapCount(0);
         clearTimeout(tapTimer);
@@ -49,12 +89,17 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
     );
   };
   return (
-    <View onPress={() => console.log("Sasdasd")}>
+    <View>
       <ImageBackground
         source={selectImage()} // Provide the correct path to your image
         style={styles.image}
         resizeMode="cover"
       >
+        {showLikeMessage && (
+          <View style={styles.likeMessage}>
+            <Image source={require('../../assets/images/icons8-like-96.png')} style={styles.likeImage} />
+          </View>
+        )}
         <PanGestureHandler
           onGestureEvent={onSwipeEvent}
           onHandlerStateChange={onSwipeEnd}
@@ -145,6 +190,18 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  likeMessage: {
+    position: 'absolute',
+    bottom: '50%',
+    right: '50%',
+    transform: [{ translateX: 75 }, { translateY: 75 }],
+    borderRadius: 8,
+    padding: 10,
+  },
+  likeImage: {
+    width: 150,
+    height: 150
   },
 });
 
