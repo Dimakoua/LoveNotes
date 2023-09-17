@@ -77,7 +77,7 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
 
     setTapTimer(
       setTimeout(() => {
-      if (tapCount === 2) {
+        if (tapCount === 2) {
           showLike();
           like(idea);
         }
@@ -109,29 +109,29 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
             >
               <Image source={require('../../assets/images/icons-settings-64.png')} style={styles.settingsButtonImage} />
             </TouchableOpacity>
-
-            {idea ? (
-              <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                  onPress={prevIdea}
-                >
-                  <SquareBlockWithArrows />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.ideaContainer}
-                  onPress={() => navigation.navigate("ideaDetails", { idea: idea })}
-                >
-                  <Text style={styles.ideaText}>{t(idea.key)}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={nextIdea}
-                >
-                  <SquareBlockWithArrows />
-                </TouchableOpacity>
-              </View>
-            ) : null}
           </View>
         </PanGestureHandler>
+
+        {idea ? (
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={prevIdea}
+            >
+              <SquareBlockWithArrows />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.ideaContainer}
+              onPress={() => navigation.navigate("ideaDetails", { idea: idea })}
+            >
+              <Text style={styles.ideaText}>{t(idea.key)}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={nextIdea}
+            >
+              <SquareBlockWithArrows />
+            </TouchableOpacity>
+          </View>
+        ) : null}
       </ImageBackground>
     </View >
   );
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    height: 120,
+    height: 130,
     maxHeight: 200,
   },
   buttonText: {
