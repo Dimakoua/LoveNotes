@@ -25,14 +25,12 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
 
   const onSwipeEnd = (event) => {
     if (offsetX > 50) {
-      console.log("PREV")
       prevIdea();
     } else if (offsetX < -50) {
-      console.log("EKEKEKEK")
       nextIdea();
     }
 
-    if (offsetX < 5) {
+    if (offsetX == 0) {
       handleTap();
     }
     offsetX = 0;
