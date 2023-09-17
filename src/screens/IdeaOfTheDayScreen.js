@@ -2,7 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native';
 import { useIdea } from '../services/IdeaGenerator';
 import { useTranslation } from "react-i18next";
-import SquareBlockWithArrows from '../components/SquareBlockWithArrows ';
+import SquareBlockWithArrows from '../components/SquareBlockWithArrows';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 
 const IdeaOfTheDayScreen = ({ navigation }) => {
   const { t } = useTranslation();
@@ -12,42 +13,62 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
     return require('../../assets/images/6.png');
   };
 
+  let offsetX = 0; // Зберігаємо змінну для відстеження руху вправо та вліво
+
+  const onSwipeEvent = (event) => {
+    offsetX = event.nativeEvent.translationX;
+  };
+
+  const onSwipeEnd = (event) => {
+    if (offsetX > 50) {
+      prevIdea();
+    } else if (offsetX < -50) {
+      nextIdea();
+    }
+    offsetX = 0; // Скидаємо змінну після закінчення жесту
+  };
+
   return (
-    <View style={styles.container}>
+    <View >
       <ImageBackground
         source={selectImage()} // Provide the correct path to your image
         style={styles.image}
         resizeMode="cover"
       >
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Settings")} // Замініть на потрібний екран налаштувань
-          style={styles.settingsButton}
+        <PanGestureHandler
+          onGestureEvent={onSwipeEvent}
+          onHandlerStateChange={onSwipeEnd}
         >
-          <Image source={require('../../assets/images/icons-settings-64.png')} style={styles.settingsButtonImage} />
-        </TouchableOpacity>
+          <View style={styles.container}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Settings")} // Замініть на потрібний екран налаштувань
+              style={styles.settingsButton}
+            >
+              <Image source={require('../../assets/images/icons-settings-64.png')} style={styles.settingsButtonImage} />
+            </TouchableOpacity>
 
-        {idea ? (
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={prevIdea}
-            >
-              <SquareBlockWithArrows />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.ideaContainer}
-              onPress={() => navigation.navigate("ideaDetails", { idea: idea })}
-            >
-              <Text style={styles.ideaText}>{t(idea.key)}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={nextIdea}
-            >
-              <SquareBlockWithArrows />
-            </TouchableOpacity>
+            {idea ? (
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  onPress={prevIdea}
+                >
+                  <SquareBlockWithArrows />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.ideaContainer}
+                  onPress={() => navigation.navigate("ideaDetails", { idea: idea })}
+                >
+                  <Text style={styles.ideaText}>{t(idea.key)}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={nextIdea}
+                >
+                  <SquareBlockWithArrows />
+                </TouchableOpacity>
+              </View>
+            ) : null}
           </View>
-        ) : null}
-
+        </PanGestureHandler>
       </ImageBackground>
     </View >
   );
@@ -58,7 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(253, 246, 238, 0.7)',
+    backgroundColor: 'rgba(253, 246, 238)',
     position: 'relative',
   },
   image: {
