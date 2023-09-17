@@ -79,7 +79,7 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
 
     setTapTimer(
       setTimeout(() => {
-        if (tapCount === 2) {
+      if (tapCount === 2) {
           showLike();
           like(idea);
         }
