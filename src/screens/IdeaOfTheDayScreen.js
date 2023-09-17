@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native';
 import { useIdea } from '../services/IdeaGenerator';
 import { useTranslation } from "react-i18next";
 import SquareBlockWithArrows from '../components/SquareBlockWithArrows';
 import { PanGestureHandler } from 'react-native-gesture-handler';
+import { TouchableWithoutFeedback } from 'react-native';
 
 const IdeaOfTheDayScreen = ({ navigation }) => {
   const { t } = useTranslation();
   const { idea, nextIdea, prevIdea } = useIdea();
+  const [tapCount, setTapCount] = useState(0); // Лічильник тапів
+  const [tapTimer, setTapTimer] = useState(null); // Таймер для тапів
 
   const selectImage = () => {
     return require('../../assets/images/6.png');
@@ -25,11 +28,28 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
     } else if (offsetX < -50) {
       nextIdea();
     }
-    offsetX = 0; // Скидаємо змінну після закінчення жесту
+
+    if (offsetX < 10) {
+      handleTap();
+    }
+    offsetX = 0;
   };
 
+  const handleTap = () => {
+    setTapCount(tapCount + 1);
+
+    setTapTimer(
+      setTimeout(() => {
+        if (tapCount === 2) {
+          console.log("KSSKKSKSKSKKSS")
+        }
+        setTapCount(0);
+        clearTimeout(tapTimer);
+      }, 300) // Визначте власний інтервал між тапами (наприклад, 300 мс)
+    );
+  };
   return (
-    <View >
+    <View onPress={() => console.log("Sasdasd")}>
       <ImageBackground
         source={selectImage()} // Provide the correct path to your image
         style={styles.image}
