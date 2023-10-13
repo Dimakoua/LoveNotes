@@ -26,14 +26,14 @@ const Stack = createStackNavigator();
 function MainContainer() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName={languageSelect}>
-                <Stack.Screen name={languageSelect} component={LanguageSelectScreen} options={{ headerShown: false }} />
+            <Stack.Navigator initialRouteName={dailyIdea}>
                 <Stack.Screen name={dailyIdea} component={IdeaOfTheDayScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={ideaDetails} component={IdeaDetailsScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={Settings} component={SettingsScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={ideaList} component={IdeaListScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={wishList} component={WishListScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={notification} component={NotificationScreen} options={{ headerShown: false }} />
+                <Stack.Screen name={languageSelect} component={LanguageSelectScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={about} component={AboutAuthorScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
