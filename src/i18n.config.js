@@ -1,14 +1,23 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import { ua, en } from "./translations";
-import { findBestLanguageTag, getLocales } from "react-native-localize";
+import { ua, en, de, fr, it } from "./translations";
+import { findBestLanguageTag } from "react-native-localize";
 //empty for now
 const resources = {
     en: {
         translation: en,
     },
-    ua: {
+    uk: {
         translation: ua,
+    },
+    de: {
+        translation: de,
+    },
+    fr: {
+        translation: fr,
+    },
+    it: {
+        translation: it,
     }
 };
 
