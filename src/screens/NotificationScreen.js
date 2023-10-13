@@ -194,9 +194,9 @@ const NotificationScreen = () => {
               style={styles.picker}
             >
               <Picker.Item label={t('none')} value={null} />
-              <Picker.Item label={t('daily')} value="daily" />
-              <Picker.Item label={t('weekly')} value="weekly" />
-              <Picker.Item label={t('monthly')} value="monthly" />
+              <Picker.Item label={t('daily')} value="day" />
+              <Picker.Item label={t('weekly')} value="week" />
+              <Picker.Item label={t('monthly')} value="month" />
             </Picker>
 
             <Text>{t('start_date')}</Text>
