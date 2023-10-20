@@ -6,14 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const LanguageSelectScreen = ({ navigation }) => {
     const { t, i18n } = useTranslation();
 
-    useEffect(() => {
-        AsyncStorage.getItem('selectedLanguage').then((selectedLanguage) => {
-            if (selectedLanguage) {
-                navigation.navigate('Ideas');
-            }
-        });
-    });
-
     const changeLanguage = async (language) => {
         // Save the selected language in AsyncStorage or any other persistent storage
         await AsyncStorage.setItem('selectedLanguage', language);
@@ -25,7 +17,10 @@ const LanguageSelectScreen = ({ navigation }) => {
 
     const languages = [
         { code: 'en', label: 'English' },
-        { code: 'ua', label: 'Українська' },
+        { code: 'uk', label: 'Українська' },
+        { code: 'de', label: 'Deutsch' },
+        { code: 'fr', label: 'Français' },
+        { code: 'it', label: 'Italiano' }
     ];
 
     return (
@@ -49,7 +44,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgb(252, 247, 241)'
-        
+
     },
     header: {
         fontSize: 24,

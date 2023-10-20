@@ -2,7 +2,8 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { ua, en, de, fr, it } from "./translations";
 import { findBestLanguageTag } from "react-native-localize";
-//empty for now
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const resources = {
     en: {
         translation: en,
@@ -21,6 +22,12 @@ const resources = {
     }
 };
 
+// Check if 'selectedLanguage' is available in AsyncStorage
+AsyncStorage.getItem('selectedLanguage').then((selectedLanguage) => {
+    i18n.changeLanguage(selectedLanguage);
+
+});
+
 const primaryLanguage = findBestLanguageTag(Object.keys(resources));
 
 i18n.use(initReactI18next).init({
@@ -33,8 +40,6 @@ i18n.use(initReactI18next).init({
         escapeValue: false, // not needed for react!!
     },
 });
-
-
 
 
 export default i18n;
