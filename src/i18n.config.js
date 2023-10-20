@@ -25,7 +25,6 @@ const resources = {
 // Check if 'selectedLanguage' is available in AsyncStorage
 AsyncStorage.getItem('selectedLanguage').then((selectedLanguage) => {
     i18n.changeLanguage(selectedLanguage);
-
 });
 
 const primaryLanguage = findBestLanguageTag(Object.keys(resources));

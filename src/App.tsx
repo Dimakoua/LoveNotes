@@ -1,7 +1,9 @@
-import {useEffect } from 'react';
+import { useEffect } from 'react';
 import MainContainer from './navigation/MainContainer';
-import PushNotification, {Importance} from 'react-native-push-notification';
+import PushNotification, { Importance } from 'react-native-push-notification';
 import "./i18n.config";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const CHANNEL_ID = "defaultLocalPushesChannelId";
 
 function App() {
 
@@ -20,8 +22,35 @@ function App() {
     );
   };
 
+  const initialSetup = () => {
+    AsyncStorage.getItem('initialSetup').then((initialSetup) => {
+      if (initialSetup) return;
+
+      // Get the current date
+      const currentDate = new Date();
+      // Add 3 days to the current date
+      currentDate.setDate(currentDate.getDate() + 3);
+
+      const newNotification = {
+        id: 1,
+        title: "It is time to buy flowers",
+        message: "Don't forget to buy some beautiful flowers!",
+        channelId: CHANNEL_ID,
+        date: currentDate,
+        repeatType: 'week',
+        repeatTime: 1
+      };
+
+      AsyncStorage.setItem('notifications', JSON.stringify([newNotification]));
+      PushNotification.localNotificationSchedule(newNotification);
+    });
+
+    AsyncStorage.setItem('initialSetup', 'true');
+  }
+
   useEffect(() => {
     createNotificationChannels();
+    initialSetup();
   }, []);
 
   return (
