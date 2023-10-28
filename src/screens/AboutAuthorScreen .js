@@ -1,18 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import BackButton from '../components/BackButton';
 
 const AboutAuthorScreen = () => {
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
+      <BackButton />
+
       <Text style={styles.authorName}>John Doe</Text>
-      <Text style={styles.authorBio}>
-        Meet John Doe, a dedicated software developer with a passion for mobile app
-        development. John thrives on creating innovative applications that tackle
-        real-world challenges and enhance the lives of users.
-      </Text>
-      <Text style={styles.contactInfo}>
-        You can reach out to John at: johndoe@example.com
-      </Text>
+      <Text style={styles.authorBio}>{t('author_bio')}</Text>
+      <Text style={styles.contactInfo}>{t('author_contact_info')} kodim.developer@gmail.com</Text>
     </View>
   );
 };
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: 'rgba(253, 246, 238, 0.7)', // Same background color as SettingsScreen
+    backgroundColor: 'rgba(253, 246, 238, 0.7)',
   },
   avatar: {
     width: 150,
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: 'rgb(222, 178, 150)', // Same header color as SettingsScreen
+    color: 'rgb(222, 178, 150)',
   },
   authorBio: {
     fontSize: 16,
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 15,
     borderRadius: 8,
-    backgroundColor: 'rgba(255, 204, 204, 0.7)', // Same background color as settingOption in SettingsScreen
+    backgroundColor: 'rgba(255, 204, 204, 0.7)',
   },
   contactInfo: {
     fontSize: 14,
