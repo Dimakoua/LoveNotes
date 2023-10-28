@@ -69,9 +69,7 @@ const IdeaListScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.backButton}>
-        <BackButton />
-      </View>
+      <BackButton />
       <Text style={styles.header}>{t('my_ideas')}</Text>
       <FlatList
         data={ideas}
@@ -159,11 +157,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(253, 246, 238, 0.7)', // Same background color as SettingsScreen
-  },
-  backButton: {
-    position: 'absolute',
-    top: 20,
-    left: 20,
   },
   header: {
     fontSize: 24,

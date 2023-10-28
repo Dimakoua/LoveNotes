@@ -8,9 +8,7 @@ const SettingsScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.backButton}>
-                <BackButton />
-            </View>
+            <BackButton />
 
             <Text style={styles.header}>{t("settings")}</Text>
 
@@ -60,11 +58,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'rgba(253, 246, 238, 0.7)',
         position: 'relative',
-    },
-    backButton: {
-        position: 'absolute',
-        top: 20,
-        left: 20,
     },
     header: {
         fontSize: 24,

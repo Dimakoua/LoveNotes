@@ -106,9 +106,7 @@ const WishListScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.backButton}>
-                <BackButton />
-            </View>
+            <BackButton />
             <TouchableOpacity
                 onPress={() => {
                     setIsEditingSearch(!isEditingSearch);
@@ -204,12 +202,6 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 16,
         backgroundColor: 'rgba(253, 246, 238, 0.7)',
-    },
-    backButton: {
-        position: 'absolute',
-        top: 20,
-        left: 20,
-        zIndex: 100,
     },
     header: {
         fontSize: 24,

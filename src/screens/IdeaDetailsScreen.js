@@ -58,9 +58,7 @@ function IdeaDetailsScreen({ route }) {
                 style={styles.image}
                 resizeMode="cover"
             >
-                <View style={styles.backButton}>
-                    <BackButton />
-                </View>
+                <BackButton />
 
                 <View style={styles.ideaTextWrap}>
                     <Text style={styles.ideaText}>{t(idea.key)}</Text>
@@ -99,11 +97,6 @@ const styles = StyleSheet.create({
     },
     image: {
         flex: 1,
-    },
-    backButton: {
-        position: 'absolute',
-        top: 20,
-        left: 20,
     },
     ideaTextWrap: {
         position: 'absolute',

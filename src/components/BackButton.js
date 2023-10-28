@@ -11,7 +11,7 @@ const BackButton = () => {
     };
 
     return (
-        <View >
+        <View style={styles.backButton}>
             <TouchableOpacity
                 onPress={handleBackPress}
                 style={styles.settingsButton}
@@ -26,6 +26,12 @@ const styles = StyleSheet.create({
     image: {
         width: 35,
         height: 35
+    },
+    backButton: {
+        position: 'absolute',
+        top: 20,
+        left: 20,
+        zIndex: 100
     },
 });
 
