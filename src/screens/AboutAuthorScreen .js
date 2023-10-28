@@ -9,7 +9,7 @@ const AboutAuthorScreen = () => {
     <View style={styles.container}>
       <BackButton />
 
-      <Text style={styles.authorName}>John Doe</Text>
+      <Text style={styles.authorName}>{t('about_author')}</Text>
       <Text style={styles.authorBio}>{t('author_bio')}</Text>
       <Text style={styles.contactInfo}>{t('author_contact_info')} kodim.developer@gmail.com</Text>
     </View>

@@ -26,7 +26,7 @@
     "none": "Keine",
     "start_date": "Startdatum",
     "schedule_notification": "Benachrichtigung planen",
-    "about": "Über uns",
+    "about": "Über den Autor",
     "idea_1": "Überraschungsdinner im Lieblingsrestaurant.",
     "idea_2": "Outdoor-Abenteuer mit Zelten und Grillen.",
     "idea_3": "Geschenk in Form von Blumen oder einem Blumenstrauß.",
@@ -118,5 +118,6 @@
     "idea_89": "Gemeinsamer Besuch eines Naturwunders wie einem Wasserfall oder einem Berggipfel.",
     "idea_90": "Überraschungsgeschenk mit dem Ausprobieren exotischer Gerichte gemeinsam.",
     "author_bio": "Hallo, ich bin Dmytro, der leidenschaftliche Entwickler hinter dieser App. Meine Liebe zur Technologie hat mich dazu geführt, Love Notes zu erstellen. Ich bin darauf spezialisiert, Ihre Erfahrung erstklassig zu gestalten. Ihr Feedback ist wichtig, also zögern Sie nicht, sich zu melden. Viel Spaß mit der App!",
-    "author_contact_info": "Sie können mich unter folgender Adresse erreichen:"
+    "author_contact_info": "Sie können mich unter folgender Adresse erreichen:",
+    "about_author": "Über den Autor"
 }

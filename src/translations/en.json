@@ -26,7 +26,7 @@
     "none": "None",
     "start_date": "Start Date",
     "schedule_notification": "Schedule Notification",
-    "about": "About",
+    "about": "About the author",
     "idea_1": "Surprise dinner at a favorite restaurant.",
     "idea_2": "Outdoor adventure with tents and barbecue.",
     "idea_3": "Gift in the form of flowers or a bouquet.",
@@ -118,5 +118,6 @@
     "idea_89": "Joint visit to a natural wonder like a waterfall or mountain peak.",
     "idea_90": "Surprise gift with trying exotic dishes together.",
     "author_bio": "Hello, I'm Dmytro, the passionate developer behind this app. My love for technology led me to create Love Notes. I'm dedicated to making your experience top-notch. Your feedback matters, so feel free to reach out. Enjoy the app!",
-    "author_contact_info": "You can reach out to me at: "
+    "author_contact_info": "You can reach out to me at: ",
+    "about_author": "About the author"
 }
