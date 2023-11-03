@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, StyleSheet,Image} from 'react-native';
+import { View, StyleSheet, Image, Text } from 'react-native';
 
-const ListEmptyComponent = () => {
+const ListEmptyComponent = ({ text }) => {
     return (
         <View style={styles.container}>
             <Image source={require('../../assets/images/search_rafiki.png')} style={styles.image} />
+            {text ? <Text>{text}</Text> : null}
         </View>
     );
 };

@@ -26,7 +26,6 @@ function App() {
 
   const initialSetup = () => {
     AsyncStorage.getItem('initialSetup').then((initialSetup) => {
-      console.log(initialSetup)
       if (initialSetup) return;
 
       ///////////////////////
@@ -52,7 +51,6 @@ function App() {
         notificationsToSave.push(obj);
       });
 
-      console.log(notificationsToSave);
       AsyncStorage.setItem('notifications', JSON.stringify(notificationsToSave));
     });
 

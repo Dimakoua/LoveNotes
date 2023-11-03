@@ -23,6 +23,8 @@ const WishListScreen = () => {
     const [ideas, setIdeas] = useState(null);
     const [showLiked, setShowLiked] = useState(true);
     const [showDone, setShowDone] = useState(false);
+    const [emptyListErrorText, setEmptyListErrorText] = useState(null);
+
     const [searchText, setSearchText] = useState(''); // Додавання стану для текстового пошуку
     const [isEditingSearch, setIsEditingSearch] = useState(false); // Додавання стану для визначення режиму редагування пошуку
 
@@ -31,7 +33,8 @@ const WishListScreen = () => {
 
     useEffect(() => {
         loadIdeas();
-    }, [showLiked, showDone, searchText]); // Включити текстовий пошук в залежності
+        toggleEmptyListText();
+    }, [showLiked, showDone, searchText]);
 
     const loadIdeas = async () => {
         const storedIdeas = await getIdeas();
@@ -55,6 +58,16 @@ const WishListScreen = () => {
         await markIsDone(item);
         loadIdeas();
     };
+
+    const toggleEmptyListText = () => {
+        if (showDone && showLiked) {
+            setEmptyListErrorText(t('liked_done_list_is_empty'));
+        } else if (showDone) {
+            setEmptyListErrorText(t('done_list_is_empty'));
+        } else {
+            setEmptyListErrorText(t('liked_list_is_empty'));
+        }
+    }
 
     const focusSearchInput = () => {
         if (searchInputRef.current) {
@@ -172,7 +185,7 @@ const WishListScreen = () => {
             <FlatList
                 data={ideas}
                 keyExtractor={(item) => item.id.toString()}
-                ListEmptyComponent={ListEmptyComponent}
+                ListEmptyComponent={() => <ListEmptyComponent text={emptyListErrorText} />}
                 renderItem={({ item }) => (
                     <Swipeable
                         renderRightActions={(_, dragX, close) =>
