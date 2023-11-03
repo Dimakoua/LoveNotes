@@ -119,5 +119,8 @@
     "idea_90": "Überraschungsgeschenk mit dem Ausprobieren exotischer Gerichte gemeinsam.",
     "author_bio": "Hallo, ich bin Dmytro, der leidenschaftliche Entwickler hinter dieser App. Meine Liebe zur Technologie hat mich dazu geführt, Love Notes zu erstellen. Ich bin darauf spezialisiert, Ihre Erfahrung erstklassig zu gestalten. Ihr Feedback ist wichtig, also zögern Sie nicht, sich zu melden. Viel Spaß mit der App!",
     "author_contact_info": "Sie können mich unter folgender Adresse erreichen:",
-    "about_author": "Über den Autor"
+    "about_author": "Über den Autor",
+    "liked_done_list_is_empty": "Ihre Liste der Favoriten und Erledigten ist leer",
+    "done_list_is_empty": "Erledigten Liste ist leer",
+    "liked_list_is_empty": "Favoritenliste ist leer"
 }
