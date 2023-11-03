@@ -141,9 +141,9 @@ const NotificationScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.notificationItem}>
-            <Text style={styles.notificationTitle}>{item.title}</Text>
-            <Text style={styles.notificationMessage}>{item.message}</Text>
-            <Text style={styles.notificationFrequency}>{t('frequency')}: {item.repeatType ?? t('none')}</Text>
+            <Text style={styles.notificationTitle}>{t(item.title)}</Text>
+            <Text style={styles.notificationMessage}>{t(item.message)}</Text>
+            <Text style={styles.notificationFrequency}>{t('frequency')}: {t(item.repeatType) ?? t('none')}</Text>
 
             <TouchableOpacity
               style={styles.cancelButton}
@@ -192,9 +192,8 @@ const NotificationScreen = () => {
               style={styles.picker}
             >
               <Picker.Item label={t('none')} value={null} />
-              <Picker.Item label={t('daily')} value="day" />
-              <Picker.Item label={t('weekly')} value="week" />
-              <Picker.Item label={t('monthly')} value="month" />
+              <Picker.Item label={t('day')} value="day" />
+              <Picker.Item label={t('week')} value="week" />
             </Picker>
 
             <Text>{t('start_date')}</Text>

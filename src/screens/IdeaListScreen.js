@@ -9,7 +9,6 @@ import {
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
 import BackButton from '../components/BackButton';
 import { useIdea } from '../services/IdeaGenerator';
@@ -46,7 +45,7 @@ const IdeaListScreen = () => {
     if (selectedIdea && newIdeaText) {
       const updatedIdeas = ideas.map((idea) =>
         idea.id === selectedIdea.id
-          ? { ...idea, text: newIdeaText }
+          ? { ...idea, key: newIdeaText, text: newIdeaText }
           : idea
       );
       setIdeas(updatedIdeas);

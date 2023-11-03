@@ -20,9 +20,8 @@
     "enter_title": "Titel eingeben",
     "enter_message": "Nachrichtentext eingeben",
     "frequency_label": "Häufigkeitslabel",
-    "daily": "Täglich",
-    "weekly": "Wöchentlich",
-    "monthly": "Monatlich",
+    "day": "Täglich",
+    "week": "Wöchentlich",
     "none": "Keine",
     "start_date": "Startdatum",
     "schedule_notification": "Benachrichtigung planen",
@@ -122,5 +121,10 @@
     "about_author": "Über den Autor",
     "liked_done_list_is_empty": "Ihre Liste der Favoriten und Erledigten ist leer",
     "done_list_is_empty": "Erledigten Liste ist leer",
-    "liked_list_is_empty": "Favoritenliste ist leer"
+    "liked_list_is_empty": "Favoritenliste ist leer",
+    "Time to Purchase Flowers": "Zeit, Blumen zu kaufen",
+    "Don't forget to buy some lovely flowers!": "Vergiss nicht, einige schöne Blumen zu kaufen!",
+    "Game Evening Reminder": "Spielabend-Erinnerung",
+    "Get ready for a fun game evening!": "Machen Sie sich bereit für einen unterhaltsamen Spieleabend!"
+
 }

@@ -20,8 +20,8 @@
     "enter_title": "Titre",
     "enter_message": "Texte du message",
     "frequency_label": "Étiquette de fréquence",
-    "daily": "Quotidien",
-    "weekly": "Hebdomadaire",
+    "day": "Quotidien",
+    "week": "Hebdomadaire",
     "monthly": "Mensuel",
     "none": "Aucun",
     "start_date": "Date de début",
@@ -122,5 +122,9 @@
     "about_author": "À propos de l'auteur",
     "liked_done_list_is_empty": "Votre liste des favoris et des tâches accomplies est vide",
     "done_list_is_empty": "La liste des tâches accomplies est vide",
-    "liked_list_is_empty": "La liste des favoris est vide"
+    "liked_list_is_empty": "La liste des favoris est vide",
+    "Time to Purchase Flowers": "Il est temps d'acheter des fleurs",
+    "Don't forget to buy some lovely flowers!": "N'oubliez pas d'acheter de jolies fleurs!",
+    "Game Evening Reminder": "Rappel de la soirée jeux",
+    "Get ready for a fun game evening!": "Préparez-vous pour une soirée de jeux amusante !"
 }

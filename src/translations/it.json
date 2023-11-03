@@ -20,9 +20,8 @@
     "enter_title": "Titolo",
     "enter_message": "Testo del messaggio",
     "frequency_label": "Etichetta di frequenza",
-    "daily": "Giornaliero",
-    "weekly": "Settimanale",
-    "monthly": "Mensile",
+    "day": "Giornaliero",
+    "week": "Settimanale",
     "none": "Nessuno",
     "start_date": "Data di inizio",
     "schedule_notification": "Pianifica Notifica",
@@ -122,5 +121,9 @@
     "about_author":  "Sul'autore",
     "liked_done_list_is_empty": "La tua lista dei Preferiti e dei compiti completati è vuota",
     "done_list_is_empty": "La lista dei compiti completati è vuota",
-    "liked_list_is_empty": "La lista dei Preferiti è vuota"
+    "liked_list_is_empty": "La lista dei Preferiti è vuota",
+    "Time to Purchase Flowers": "È il momento di acquistare dei fiori",
+    "Don't forget to buy some lovely flowers!": "Non dimenticare di comprare dei bei fiori!",
+    "Game Evening Reminder": "Promemoria serata di giochi",
+    "Get ready for a fun game evening!": "Preparati per una divertente serata di giochi!"
 }
