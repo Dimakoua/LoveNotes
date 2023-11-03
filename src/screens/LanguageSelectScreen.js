@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import BackButton from '../components/BackButton';
 
 const LanguageSelectScreen = ({ navigation }) => {
     const { t, i18n } = useTranslation();
@@ -25,6 +26,7 @@ const LanguageSelectScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <BackButton />
             {languages.map((language) => (
                 <TouchableOpacity
                     key={language.code}
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
         color: '#333',
     },
     languageButton: {
-        backgroundColor: 'rgb(253, 224, 213)',
+        backgroundColor: 'rgba(255, 204, 204, 0.7)',
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,

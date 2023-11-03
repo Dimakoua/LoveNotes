@@ -14,6 +14,7 @@ import BackButton from '../components/BackButton';
 import { useIdea } from '../services/IdeaGenerator';
 import { RectButton, Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import ListEmptyComponent from '../components/ListEmptyComponent';
 
 const WishListScreen = () => {
     const { t } = useTranslation();
@@ -118,7 +119,6 @@ const WishListScreen = () => {
             </TouchableOpacity>
 
             <View style={styles.headerWrap}>
-                {/* {isEditingSearch ? ( // Відображати поле пошуку, якщо isEditingSearch === true */}
                 <TextInput
                     ref={searchInputRef}
                     style={[
@@ -130,15 +130,12 @@ const WishListScreen = () => {
                     blurOnSubmit={false}
                     onChangeText={(text) => setSearchText(text)}
                 />
-                {/* ) : ( */}
                 <Text style={[
                     styles.header,
                     isEditingSearch ? styles.hidden : null,
                 ]}>
                     {t('wish_list')}
                 </Text>
-                {/* ) */}
-                {/* } */}
             </View>
             <View style={styles.filterButtons}>
                 <TouchableOpacity
@@ -175,6 +172,7 @@ const WishListScreen = () => {
             <FlatList
                 data={ideas}
                 keyExtractor={(item) => item.id.toString()}
+                ListEmptyComponent={ListEmptyComponent}
                 renderItem={({ item }) => (
                     <Swipeable
                         renderRightActions={(_, dragX, close) =>
