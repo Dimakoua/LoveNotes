@@ -78,7 +78,7 @@ const IdeaListScreen = () => {
             style={styles.ideaContainer}
             onPress={() => {
               setSelectedIdea(item);
-              setNewIdeaText(item.text);
+              setNewIdeaText(t(item.key) || item.text);
               setModalVisible(true);
             }}
           >
