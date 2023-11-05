@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.lovenotes"
+    namespace "com.kodimlovenotes"
     defaultConfig {
-        applicationId "com.lovenotes"
+        applicationId "com.kodimlovenotes"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,4 +1,4 @@
-package com.lovenotes;
+package com.kodimlovenotes;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

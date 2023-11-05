@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.lovenotes",
+  "applicationId": "com.kodimlovenotes",
   "variantName": "release",
   "elements": [
     {
