@@ -1,3 +1,34 @@
+# Love Notes
+
+💖 Discover Endless Date Ideas:
+With 100 unique and creative date ideas at your fingertips, you'll never run out of exciting things to do with your partner. From cozy movie nights to thrilling outdoor adventures, we've got something for every mood and occasion.
+
+🌹 Romantic Reminders:
+Don't let the busyness of life get in the way of keeping the romance alive. Set up customizable notifications to remind yourself to do something special. Whether it's sending a sweet message, planning a surprise, or buying a bouquet of flowers, our app will make sure you never miss a romantic moment.
+
+💌 Easy to Use:
+Our user-friendly interface makes it a breeze to browse through date ideas and set up reminders. You can personalize your reminders based on your partner's preferences and your own schedule.
+
+❤️ Strengthen Your Connection:
+Cultivate a deeper connection with your loved one by creating lasting memories together. "Love Notes" is your go-to companion for building a stronger, more passionate relationship.
+
+🌟 Why Choose Us:
+
+100 handpicked date ideas to keep things fresh.
+Customize reminders to suit your unique relationship.
+Perfect for couples at any stage of their journey.
+User-friendly interface for a hassle-free experience.
+Don't let the magic fade in your relationship; download Love Notes" today and start creating unforgettable memories with your loved one. Rediscover the joy of love and embark on a journey filled with romance.
+
+Let's make every day Valentine's Day! Download now and ignite the spark in your relationship.
+
+<div>
+   <img src="./readme_assets/Apple iPhone 11 Pro Max Screenshot 0.png" width="200"/>
+   <img src="./readme_assets/Apple iPhone 11 Pro Max Screenshot 1.png" width="200"/>
+   <img src="./readme_assets/Apple iPhone 11 Pro Max Screenshot 2.png" width="200"/>
+   <img src="./readme_assets/Apple iPhone 11 Pro Max Screenshot 3.png" width="200"/>
+</div>
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
@@ -77,20 +108,3 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
-
-
- cd "C:\Users\Dmytro\Documents\project\LoveNotes" && npx react-native run-android
-
-
-
- java -jar bundletool-all-1.15.4.jar version
-
-
-
-bundletool build-apks --bundle=app-release.aab --output=app-release.apks --mode=universal
-bundletool get-apks --apks=app-release.apks --output-dir=apks
-
-
- java -jar bundletool-all-1.15.4.jar build-apks --bundle=app-release.aab --output=app-release.apks --mode=universal
- java -jar bundletool-all-1.15.4.jar extract-apks --apks=app-release.apks --output-dir=apks
- java -jar bundletool-all-1.15.4.jar extract-apks --apks=app-release.apks --output-dir=apks  --device-spec=device-spec.json
