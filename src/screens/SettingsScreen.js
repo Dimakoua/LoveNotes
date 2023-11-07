@@ -12,7 +12,6 @@ const SettingsScreen = ({ navigation }) => {
 
             <Text style={styles.header}>{t("settings")}</Text>
 
-            {/* Add your settings options here */}
             <TouchableOpacity
                 style={styles.settingOption}
                 onPress={() => navigation.navigate("languageSelect")}

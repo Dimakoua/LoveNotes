@@ -9,15 +9,15 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
   const { t } = useTranslation();
   const { idea, nextIdea, prevIdea, like } = useIdea();
 
-  const [tapCount, setTapCount] = useState(0); // Лічильник тапів
-  const [tapTimer, setTapTimer] = useState(null); // Таймер для тапів
-  const [showLikeMessage, setShowLikeMessage] = useState(false); // State to control the like message
+  const [tapCount, setTapCount] = useState(0);
+  const [tapTimer, setTapTimer] = useState(null);
+  const [showLikeMessage, setShowLikeMessage] = useState(false);
 
   const selectImage = () => {
     return require('../../assets/images/6.png');
   };
 
-  let offsetX = 0; // Зберігаємо змінну для відстеження руху вправо та вліво
+  let offsetX = 0;
 
   const onSwipeEvent = (event) => {
     offsetX = event.nativeEvent.translationX;
@@ -37,8 +37,8 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
   };
 
   // Create an animated value
-  const likeOpacity = new Animated.Value(0); // Initialize with 0 opacity
-  const likeScale = new Animated.Value(0.5); // Initialize with 0 scale
+  const likeOpacity = new Animated.Value(0);
+  const likeScale = new Animated.Value(0.5);
   // Function to show the like message
   const showLike = () => {
     setShowLikeMessage(true);
@@ -83,13 +83,13 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
         }
         setTapCount(0);
         clearTimeout(tapTimer);
-      }, 300) // Визначте власний інтервал між тапами (наприклад, 300 мс)
+      }, 300)
     );
   };
   return (
     <View>
       <ImageBackground
-        source={selectImage()} // Provide the correct path to your image
+        source={selectImage()}
         style={styles.image}
         resizeMode="cover"
       >
@@ -104,7 +104,7 @@ const IdeaOfTheDayScreen = ({ navigation }) => {
         >
           <View style={styles.container}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Settings")} // Замініть на потрібний екран налаштувань
+              onPress={() => navigation.navigate("Settings")}
               style={styles.settingsButton}
             >
               <Image source={require('../../assets/images/icons-settings-64.png')} style={styles.settingsButtonImage} />
@@ -159,7 +159,6 @@ const styles = StyleSheet.create({
     height: 35
   },
   ideaContainer: {
-    // backgroundColor: 'rgba(255, 204, 204, 0.7)',
     padding: 16,
     borderRadius: 8,
     marginBottom: 16,
