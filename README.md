@@ -22,6 +22,8 @@ Don't let the magic fade in your relationship; download Love Notes" today and st
 
 Let's make every day Valentine's Day! Download now and ignite the spark in your relationship.
 
+[View on Google Play](https://play.google.com/store/apps/details?id=com.kodimlovenotes)
+
 <div>
    <img src="./readme_assets/Apple iPhone 11 Pro Max Screenshot 0.png" width="200"/>
    <img src="./readme_assets/Apple iPhone 11 Pro Max Screenshot 1.png" width="200"/>
